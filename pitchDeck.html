@@ -6,6 +6,109 @@
   <title>PitchBridge - Pitch Deck</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+
+    .dashboard-container {
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 240px;
+      background-color: #5D5FEF;
+      color: white;
+      padding: 2rem 1rem;
+      flex-shrink: 0;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0.5rem 0;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+
+    .sidebar-nav a:hover,
+    .sidebar-nav a.active {
+      background-color: #4749cc;
+    }
+
+    .main-content {
+      margin-left: 240px;
+      padding: 2rem;
+      flex: 1;
+    }
+
+    .main-content h2 {
+      color: #333;
+    }
+
+    .subheading {
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+
+    .upload-section {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      max-width: 500px;
+    }
+
+    .custom-file-upload {
+      display: block;
+      background-color: #f0f0f0;
+      border: 2px dashed #ccc;
+      padding: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      text-align: center;
+      color: #333;
+    }
+
+    .custom-file-upload input {
+      display: none;
+    }
+
+    .btn {
+      background-color: #5D5FEF;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .btn:hover {
+      background-color: #4749cc;
+    }
+  </style>
 </head>
 <body>
   <div class="dashboard-container">
@@ -13,12 +116,15 @@
     <aside class="sidebar">
       <h1 class="logo">PitchBridge</h1>
       <nav class="sidebar-nav">
-        <a href="HomePage.html">Home</a>
-        <a href="PitchDeck.html" class="active">Pitch Deck</a>
-        <a href="InvestorDeck.html">Investor Deck</a>
-        <a href="FAQandHelpPage.html">Help</a>
-        <a href="Settings.html">Settings</a>
-        <a href="LoginPage.html">Log Out</a>
+        <a href="homepage.html">🏠 Home</a>
+        <a href="pitchDeck.html" class="active">📊 Pitch Deck</a>
+        <a href="investorDeck.html" id="investorDeckLink">💼 Investor Deck</a>
+        <a href="profile.html">👤 Profile</a> 
+        <a href="message.html">💬 Messages</a>
+        <a href="setting.html">⚙️ Settings</a>
+        <a href="FAQandHelpPage.html" class="nav-link">❓ FAQ / Help</a>
+        <a href="contact.html" class="nav-link">📞 Contact</a>
+        <a href="logout.html">🚪 Log Out</a>
       </nav>
     </aside>
 
@@ -37,7 +143,22 @@
     </main>
   </div>
 
+  <!-- Role-based Sidebar Logic -->
   <script>
+    const role = localStorage.getItem("userRole");
+
+    // Redirect if not startup
+    if (role !== "startup") {
+      alert("Access Denied: Only startups can access the Pitch Deck.");
+      window.location.href = "homepage.html";
+    }
+
+    // Hide investor deck if role is startup
+    if (role === "startup") {
+      const investorLink = document.getElementById("investorDeckLink");
+      if (investorLink) investorLink.style.display = "none";
+    }
+
     document.getElementById("pitchFile").addEventListener("change", function () {
       const fileName = this.files[0]?.name || "Upload Pitch Deck (PDF/PPT, max 10MB)";
       document.getElementById("fileName").textContent = fileName;
@@ -49,8 +170,9 @@
         alert("Please choose a file before uploading.");
         return;
       }
-      alert("Deck uploaded successfully!"); // Replace with actual logic if needed
+      alert("Deck uploaded successfully!");
     }
   </script>
 </body>
 </html>
+

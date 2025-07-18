@@ -7,6 +7,59 @@
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background-color: #f9f9f9;
+      display: flex;
+    }
+
+    .dashboard-layout {
+      display: flex;
+      width: 100%;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #5D5FEF;
+      color: white;
+      height: 100vh;
+      position: fixed;
+      padding: 1rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.7rem 1rem;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .sidebar-nav a:hover,
+    .sidebar-nav a.active {
+      background-color: #4749cc;
+    }
+
+    .main-content {
+      margin-left: 250px;
+      padding: 2rem;
+      width: 100%;
+    }
+
     .upload-box {
       max-width: 700px;
       margin: 2rem auto;
@@ -24,7 +77,7 @@
 
     .upload-box button {
       padding: 0.7rem 2rem;
-      background-color: #007bff;
+      background-color: #4749cc;
       color: #fff;
       border: none;
       border-radius: 5px;
@@ -33,7 +86,7 @@
     }
 
     .upload-box button:hover {
-      background-color: #0056b3;
+      background-color: #4749cc;
     }
 
     .file-details {
@@ -63,9 +116,18 @@
       margin-top: 0.5rem;
     }
 
-    @media screen and (max-width: 600px) {
-      .upload-box {
-        margin: 1rem;
+    .footer {
+      text-align: center;
+      margin-top: 4rem;
+      color: #777;
+    }
+
+    @media screen and (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+      .main-content {
+        margin-left: 0;
         padding: 1rem;
       }
     }
@@ -75,23 +137,23 @@
   <div class="dashboard-layout">
     <!-- Sidebar -->
     <aside class="sidebar">
-      <div class="logo">PitchBridge</div>
-      <nav class="sidebar-nav">
-        <a href="HomePage.html">Home</a>
-        <a href="PitchDeck.html">Pitch Deck</a>
-        <a href="InvestorDeck.html" class="active">Investor Deck</a>
-        <a href="Profile.html">Profile</a>
-        <a href="Messages.html">Messages</a>
-        <a href="Settings.html">Settings</a>
-        <a href="LoginPage.html">Login</a>
-        <a href="SignUpPage.html">Sign Up</a>
-        <a href="Logout.html">Log Out</a>
-      </nav>
-    </aside>
+  <h1 class="logo">PitchBridge</h1>
+  <nav class="sidebar-nav">
+    <a href="homepage.html">🏠 Home</a>
+    <a href="investorDeck.html" class="active">💼 Investor Deck</a>
+    <a href="profile.html">👤 Profile</a> 
+    <a href="message.html">💬 Messages</a>
+    <a href="setting.html">⚙️ Settings</a>
+    <a href="FAQandHelpPage.html" class="nav-link">❓ FAQ / Help</a>
+    <a href="contact.html" class="nav-link">📞 Contact</a>
+    <a href="logout.html">🚪 Log Out</a>
+  </nav>
+</aside>
+
 
     <!-- Main Content -->
     <main class="main-content">
-      <h2 style="text-align: center; margin-top: 2rem;">Investor Deck</h2>
+      <h2 style="text-align: center;">Investor Deck</h2>
 
       <div class="upload-box">
         <p style="font-size: 1.1rem; color: #555;">

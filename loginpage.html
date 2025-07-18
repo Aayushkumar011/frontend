@@ -34,6 +34,29 @@
           <img src="assets/eye.svg" alt="Toggle" id="toggleLoginPassword" class="toggle-password" />
         </div>
 
+                
+        <div class="input-group">
+          <label for="loginRole" style="margin-bottom: 5px; font-weight: 600;">Select Role:</label>
+          <select id="loginRole" required style="
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            width: 100%;
+            font-size: 1rem;
+            background-color: #f9f9f9;
+            color: #333;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: border-color 0.3s ease;
+          ">
+            <option value="">Choose your role</option>
+            <option value="startup">Startup</option>
+            <option value="investor">Investor</option>
+          </select>
+        </div>
+
+
+
         <button type="submit" class="btn">Login</button>
 
 
@@ -62,14 +85,27 @@
       toggle.src = type === "password" ? "assets/eye.svg" : "assets/eye-off.svg";
     });
 
-    // Handle form submission
     const form = document.querySelector(".signup-form");
     form.addEventListener("submit", (e) => {
-      e.preventDefault(); // Prevent actual form submission
-      window.location.href = "dashboard.html"; // Redirect to dashboard
+      e.preventDefault();
+
+      const role = document.getElementById("loginRole").value;
+      if (!role) {
+        alert("Please select your role.");
+        return;
+      }
+
+      // ✅ Store login status
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("userRole", role);
+
+      // ✅ Redirect to dashboard
+      window.location.href = "dashboard.html";
     });
   });
 </script>
+
+
 
 </body>
 </html>

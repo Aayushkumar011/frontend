@@ -468,6 +468,153 @@ nav a {
   height: 80px;
   margin-bottom: 10px;
 }
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  height: 100%;
+}
+
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f4f6f9;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background-color: #5D5FEF; /* Updated to match PitchDeck */
+  color: #fff;
+  padding: 1.5rem 1rem;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.sidebar .logo {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-nav a {
+  color: #e0e0ff; /* Lighter for better contrast on blue */
+  text-decoration: none;
+  margin: 0.7rem 0;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.active {
+  color: #fff;
+  background-color: #4749cc; /* Slightly darker on hover */
+  padding-left: 10px;
+  border-radius: 5px;
+}
+
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  margin-left: 220px;
+  padding: 2rem;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  color: #777;
+  margin-top: 3rem;
+  font-size: 0.9rem;
+}
+/* === Investor Deck Upload Section - Styled to Match Website === */
+.upload-box {
+  max-width: 700px;
+  margin: 2rem auto;
+  background: #f4f6f9;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  border: 1px solid #d6dbe2;
+}
+
+.upload-box input[type="file"] {
+  display: block;
+  margin: 1.2rem auto;
+  font-family: 'Inter', sans-serif;
+}
+
+.upload-box button {
+  padding: 0.7rem 2rem;
+  background-color: #007bff;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.upload-box button:hover {
+  background-color: #0056b3;
+}
+
+.upload-box button[style*="background-color: #dc3545"] {
+  background-color: #dc3545 !important;
+}
+
+.upload-box button[style*="background-color: #dc3545"]:hover {
+  background-color: #bb2d3b !important;
+}
+
+.file-details {
+  font-size: 0.9rem;
+  color: #444;
+  margin-top: 0.5rem;
+  font-family: 'Inter', sans-serif;
+}
+
+.file-icon {
+  font-size: 1.8rem;
+  margin-top: 0.5rem;
+}
+
+.progress-bar {
+  width: 100%;
+  background-color: #e9ecef;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 1rem;
+  display: none;
+  height: 12px;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: #28a745;
+  width: 0%;
+  transition: width 1s ease-in-out;
+}
+
+@media screen and (max-width: 600px) {
+  .upload-box {
+    margin: 1rem;
+    padding: 1.2rem;
+  }
+}
+
+
 
 
 

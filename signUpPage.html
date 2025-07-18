@@ -43,23 +43,22 @@
         </div>
 
         <!-- Password Field -->
-      <div class="input-group password-group">
-        <img src="asset/lock.gif" alt="Password Icon">
-        <input type="password" placeholder="Password" id="password" required />
-        <span class="toggle-password" onclick="togglePassword('password', 'eyeIcon1')">
-          <img id="eyeIcon1" src="asset/eye.svg" alt="Toggle Eye" />
-        </span>
-      </div>
+        <div class="input-group password-group">
+          <img src="asset/lock.gif" alt="Password Icon">
+          <input type="password" placeholder="Password" id="password" required />
+          <span class="toggle-password" onclick="togglePassword('password', 'eyeIcon1')">
+            <img id="eyeIcon1" src="asset/eye.svg" alt="Toggle Eye" />
+          </span>
+        </div>
 
         <!-- Confirm Password Field -->
-      <div class="input-group password-group">
-        <img src="asset/lock.gif" alt="Confirm Password Icon">
-        <input type="password" placeholder="Confirm Password" id="confirmPassword" required />
-        <span class="toggle-password" onclick="togglePassword('confirmPassword', 'eyeIcon2')">
-          <img id="eyeIcon2" src="asset/eye.svg" alt="Toggle Eye" />
-        </span>
-      </div>
-
+        <div class="input-group password-group">
+          <img src="asset/lock.gif" alt="Confirm Password Icon">
+          <input type="password" placeholder="Confirm Password" id="confirmPassword" required />
+          <span class="toggle-password" onclick="togglePassword('confirmPassword', 'eyeIcon2')">
+            <img id="eyeIcon2" src="asset/eye.svg" alt="Toggle Eye" />
+          </span>
+        </div>
 
         <!-- Startup-specific Fields -->
         <div class="startup-fields visible">
@@ -144,38 +143,31 @@
         const password = document.getElementById("password").value;
         const confirmPassword = document.getElementById("confirmPassword").value;
         const errorMsg = document.getElementById("errorMessage");
+        const role = roleField.value;
 
         if (password !== confirmPassword) {
           e.preventDefault();
           errorMsg.textContent = "Passwords do not match.";
         } else {
           errorMsg.textContent = "";
-          e.preventDefault(); // prevent actual form submit
-          window.location.href = "dashboard.html"; // redirect
+          localStorage.setItem("userRole", role); // ✅ Save role
+          e.preventDefault(); // Prevent real submit for demo
+          window.location.href = "dashboard.html"; // ✅ Redirect
         }
       });
     });
-  </script>
-  <script>
-  function togglePassword(inputId, iconId) {
-    const input = document.getElementById(inputId);
-    const icon = document.getElementById(iconId);
 
-    if (input.type === "password") {
-      input.type = "text";
-      icon.src = "asset/eye-off.svg";
-    } else {
-      input.type = "password";
-      icon.src = "asset/eye.svg";
+    function togglePassword(inputId, iconId) {
+      const input = document.getElementById(inputId);
+      const icon = document.getElementById(iconId);
+      if (input.type === "password") {
+        input.type = "text";
+        icon.src = "asset/eye-off.svg";
+      } else {
+        input.type = "password";
+        icon.src = "asset/eye.svg";
+      }
     }
-  }
-</script>
-
-
-
-
+  </script>
 </body>
 </html>
-
-
-

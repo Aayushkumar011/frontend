@@ -64,7 +64,7 @@
     }
 
     .main-section {
-      margin-left: 240px; /* same as sidebar width */
+      margin-left: 240px;
       padding: 2rem;
       flex: 1;
       background-color: #ffffff;
@@ -111,22 +111,20 @@
 <body>
   <div class="dashboard-container">
     <!-- Sidebar -->
-    <!-- Sidebar -->
-<aside class="sidebar">
-  <div class="sidebar-header">PitchBridge</div>
-  <nav class="sidebar-nav">
-    <a href="homepage.html" class="nav-link">🏠 Home</a>
-    <a href="pitchDeck.html" class="nav-link">📄 Pitch Deck</a>
-    <a href="investorDeck.html" class="nav-link">💼 Investor Deck</a>
-    <a href="profile.html" class="nav-link">👤 Profile</a>
-    <a href="message.html" class="nav-link">💬 Messages</a>
-    <a href="setting.html" class="nav-link">⚙️ Settings</a>
-    <a href="FAQandHelpPage.html" class="nav-link">❓ FAQ / Help</a>
-    <a href="contact.html" class="nav-link">📞 Contact</a>
-    <a href="logout.html" class="nav-link logout">🚪 Logout</a>
-  </nav>
-</aside>
-
+    <aside class="sidebar">
+      <div class="sidebar-header">PitchBridge</div>
+      <nav class="sidebar-nav">
+        <a href="homepage.html" class="nav-link">🏠 Home</a>
+        <a href="pitchDeck.html" class="nav-link" id="pitchDeckLink">📊 Pitch Deck</a>
+        <a href="investorDeck.html" class="nav-link" id="investorDeckLink">💼 Investor Deck</a>
+        <a href="profile.html" class="nav-link">👤 Profile</a>
+        <a href="message.html" class="nav-link">💬 Messages</a>
+        <a href="setting.html" class="nav-link">⚙️ Settings</a>
+        <a href="FAQandHelpPage.html" class="nav-link">❓ FAQ / Help</a>
+        <a href="contact.html" class="nav-link">📞 Contact</a>
+        <a href="logout.html" class="nav-link logout">🚪 Logout</a>
+      </nav>
+    </aside>
 
     <!-- Main Content -->
     <main class="main-section">
@@ -144,5 +142,22 @@
       </div>
     </main>
   </div>
+
+ <!-- 🔐 Role-based Hiding Script -->
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const role = localStorage.getItem('userRole'); // 'startup' or 'investor'
+
+    if (role === 'startup') {
+      const investorDeck = document.getElementById('investorDeckLink');
+      if (investorDeck) investorDeck.style.display = 'none';
+    } else if (role === 'investor') {
+      const pitchDeck = document.getElementById('pitchDeckLink');
+      if (pitchDeck) pitchDeck.style.display = 'none';
+    }
+  });
+</script>
+
 </body>
 </html>
+

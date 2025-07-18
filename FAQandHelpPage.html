@@ -1,4 +1,3 @@
-<!-- FAQ / Help - PitchBridge -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,27 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>FAQ & Help - PitchBridge</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #fafafa;
+      background-color: #f0f2f5;
       margin: 0;
-      padding: 2rem;
-      color: #333;
+      padding-left: 250px;
     }
 
     .faq-container {
       max-width: 900px;
-      margin: auto;
+      margin: 3rem auto;
       background-color: #fff;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      padding: 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
     }
 
     h1 {
-      color: #5D5FEF;
-      margin-bottom: 1rem;
+      color: #2b2f45;
+      font-size: 2rem;
+      margin-bottom: 2rem;
     }
 
     .faq-item {
@@ -35,6 +35,7 @@
 
     .faq-question {
       font-weight: 600;
+      font-size: 1.1rem;
       cursor: pointer;
       position: relative;
       padding-right: 20px;
@@ -63,68 +64,145 @@
       color: #555;
       margin-top: 0.5rem;
       font-size: 0.95rem;
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
     .faq-answer.open {
-      max-height: 200px;
+      max-height: 300px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 240px;
+      background-color: #5D5FEF;
+      color: #fff;
+      padding: 1.5rem 1rem;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      z-index: 999;
+    }
+
+    .sidebar .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 2rem;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-nav a {
+      color: #cfcfe0;
+      text-decoration: none;
+      margin: 0.8rem 0;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+    }
+
+    .sidebar-nav a:hover {
+      background-color: #4749cc;
+      color: #fff;
+    }
+
+    .lucide {
+      width: 18px;
+      height: 18px;
     }
   </style>
 </head>
 <body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">PitchBridge</div>
+    <nav class="sidebar-nav">
+      <a href="homepage.html">🏠 Home</a>
+      <a href="pitchDeck.html" id="pitchDeckLink" style="display: none;">📊 Pitch Deck</a>
+      <a href="investorDeck.html" id="investorDeckLink" style="display: none;">💼 Investor Deck</a>
+      <a href="profile.html">👤 Profile</a>
+      <a href="message.html">💬 Messages</a>
+      <a href="setting.html">⚙️ Settings</a>
+      <a href="FAQandHelpPage.html" class="active">❓ FAQ / Help</a>
+      <a href="contact.html">📞 Contact</a>
+      <a href="logout.html">🚪 Logout</a>
+    </nav>
+  </aside>
+
+  <!-- FAQ Section -->
   <div class="faq-container">
     <h1>FAQ & Help</h1>
 
     <div class="faq-item">
       <div class="faq-question">How do I create an account?</div>
       <div class="faq-answer">
-        To create an account, click on the Sign Up button on the homepage and fill in the required details.
+        Click the "Sign Up" button on the homepage and provide your details to get started.
       </div>
     </div>
 
     <div class="faq-item">
       <div class="faq-question">I forgot my password. What should I do?</div>
       <div class="faq-answer">
-        Use the "Forgot Password" link on the login page to reset your password via your registered email.
+        Use the "Forgot Password" link on the login page and follow the instructions to reset your password.
       </div>
     </div>
 
     <div class="faq-item">
       <div class="faq-question">How can I update my profile information?</div>
       <div class="faq-answer">
-        Navigate to the Profile page from your dashboard to update your personal details and preferences.
+        Navigate to the "Profile" page from your dashboard and click "Edit" to make changes.
       </div>
     </div>
 
     <div class="faq-item">
       <div class="faq-question">How do I delete my account?</div>
       <div class="faq-answer">
-        Go to Settings &gt; Delete Account and follow the instructions. Note that deletion is permanent.
+        Go to "Settings" → "Delete Account" and confirm. This action is permanent.
       </div>
     </div>
 
     <div class="faq-item">
       <div class="faq-question">Who can I contact for support?</div>
       <div class="faq-answer">
-        You can reach out to our support team via the Contact page or email us at support@pitchbridge.com.
+        You can email us at <strong>support@pitchbridge.com</strong> or visit the "Contact Us" section.
       </div>
     </div>
   </div>
 
   <script>
-    const questions = document.querySelectorAll('.faq-question');
+    lucide.createIcons();
 
+    const questions = document.querySelectorAll('.faq-question');
     questions.forEach(question => {
       question.addEventListener('click', () => {
         question.classList.toggle('active');
         const answer = question.nextElementSibling;
-        if(answer.classList.contains('open')){
-          answer.classList.remove('open');
-        } else {
-          answer.classList.add('open');
-        }
+        answer.classList.toggle('open');
       });
     });
   </script>
+  <script>
+  // Example: 'startup' will see Pitch Deck, 'investor' will see Investor Deck
+  const role = localStorage.getItem("userRole"); // Set this during login
+
+  if (role === "startup") {
+    document.getElementById("pitchDeckLink").style.display = "flex";
+  } else if (role === "investor") {
+    document.getElementById("investorDeckLink").style.display = "flex";
+  }
+</script>
+
 </body>
 </html>
+

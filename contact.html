@@ -3,38 +3,93 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact - PitchBridge</title>
+  <title>PitchBridge - Contact</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #f9f9f9;
       margin: 0;
-      padding: 2rem;
+      display: flex;
+      height: 100vh;
     }
+
+    .dashboard-container {
+      display: flex;
+      width: 100%;
+    }
+
+    .sidebar {
+      width: 240px;
+      background-color: #5D5FEF;
+      color: white;
+      padding: 2rem 1rem;
+      flex-shrink: 0;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+
+    .sidebar .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0.5rem 0;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+
+    .sidebar-nav a:hover {
+      background-color: #4749cc;
+    }
+
+    .main-section {
+      margin-left: 240px;
+      padding: 2rem;
+      flex: 1;
+      background-color: #f9f9f9;
+      overflow-y: auto;
+    }
+
     .contact-container {
       max-width: 800px;
       background: white;
-      margin: 3rem auto;
+      margin: 2rem auto;
       padding: 2rem;
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     }
+
     h2 {
       color: #003366;
       text-align: center;
       margin-bottom: 1.5rem;
     }
+
     form {
       display: flex;
       flex-direction: column;
       gap: 1rem;
     }
+
     label {
       font-weight: 600;
       color: #333;
     }
+
     input, textarea {
       padding: 0.75rem;
       border-radius: 6px;
@@ -43,9 +98,11 @@
       font-family: 'Inter', sans-serif;
       resize: vertical;
     }
+
     textarea {
       min-height: 120px;
     }
+
     button {
       background-color: #5D5FEF;
       color: white;
@@ -57,27 +114,64 @@
       transition: background-color 0.3s ease;
       font-size: 1rem;
     }
+
     button:hover {
       background-color: #4749cc;
     }
   </style>
 </head>
 <body>
-  <div class="contact-container">
-    <h2>Contact Us</h2>
-    <form>
-      <label for="name">Full Name</label>
-      <input type="text" id="name" name="name" required />
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">PitchBridge</div>
+      <nav class="sidebar-nav">
+        <a href="homepage.html">🏠 Home</a>
+        <a href="pitchDeck.html" id="pitchDeckLink" style="display: none;">📊 Pitch Deck</a>
+        <a href="investorDeck.html" id="investorDeckLink" style="display: none;">💼 Investor Deck</a>
+        <a href="profile.html">👤 Profile</a>
+        <a href="message.html">💬 Messages</a>
+        <a href="setting.html">⚙️ Settings</a>
+        <a href="FAQandHelpPage.html">❓ FAQ / Help</a>
+        <a href="contact.html" class="active">📞 Contact</a>
+        <a href="logout.html">🚪 Logout</a>
+      </nav>
+    </aside>
 
-      <label for="email">Email Address</label>
-      <input type="email" id="email" name="email" required />
+    <!-- Main Content -->
+    <main class="main-section">
+      <div class="contact-container">
+        <h2>Contact Us</h2>
+        <form>
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" required />
 
-      <label for="message">Message</label>
-      <textarea id="message" name="message" required></textarea>
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required />
 
-      <button type="submit">Send Message</button>
-    </form>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required></textarea>
+
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </main>
   </div>
+
+  <!-- Role-based visibility JS -->
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const role = localStorage.getItem('userRole');
+      if (role === 'startup') {
+        document.getElementById('investorDeckLink').style.display = 'none';
+        document.getElementById('pitchDeckLink').style.display = 'block';
+      } else if (role === 'investor') {
+        document.getElementById('pitchDeckLink').style.display = 'none';
+        document.getElementById('investorDeckLink').style.display = 'block';
+      }
+    });
+  </script>
 </body>
 </html>
+
 
