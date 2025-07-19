@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact - PitchBridge Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body class="dashboard-page">
+  <div class="dashboard-container">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">PitchBridge</div>
+      <nav class="sidebar-nav">
+        <a href="homepage.html" class="nav-link">🏠 Home</a>
+        <a href="pitchDeck.html" class="nav-link" id="pitchDeckLink">📊 Pitch Deck</a>
+        <a href="investorDeck.html" class="nav-link" id="investorDeckLink">💼 Investor Deck</a>
+        <a href="profile.html" class="nav-link">👤 Profile</a>
+        <a href="message.html" class="nav-link">💬 Messages</a>
+        <a href="setting.html" class="nav-link">⚙️ Settings</a>
+        <a href="FAQandHelpPage.html" class="nav-link">❓ FAQ / Help</a>
+        <a href="dashboardContact.html" class="nav-link">📞 Contact</a>
+        <a href="logout.html" class="nav-link logout">🚪 Logout</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-section">
+      <h2 class="contact-title">Get in Touch</h2>
+      <form id="contactForm" class="contact-form">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" name="subject" required />
+
+        <label for="topic">Topic</label>
+        <select id="topic" name="topic" required>
+          <option value="">Select Topic</option>
+          <option value="general">General Inquiry</option>
+          <option value="technical">Technical Issue</option>
+          <option value="partnership">Partnership</option>
+        </select>
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button type="submit">Send Message</button>
+        <div id="form-status" class="status-message"></div>
+      </form>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -6,260 +6,41 @@
   <title>PitchBridge - Investor Deck</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      background-color: #f9f9f9;
-      display: flex;
-    }
-
-    .dashboard-layout {
-      display: flex;
-      width: 100%;
-    }
-
-    .sidebar {
-      width: 250px;
-      background-color: #5D5FEF;
-      color: white;
-      height: 100vh;
-      position: fixed;
-      padding: 1rem;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-
-    .sidebar-nav {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .sidebar-nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-      padding: 0.7rem 1rem;
-      border-radius: 8px;
-      transition: background-color 0.3s ease;
-    }
-
-    .sidebar-nav a:hover,
-    .sidebar-nav a.active {
-      background-color: #4749cc;
-    }
-
-    .main-content {
-      margin-left: 250px;
-      padding: 2rem;
-      width: 100%;
-    }
-
-    .upload-box {
-      max-width: 700px;
-      margin: 2rem auto;
-      background: #fff;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-
-    .upload-box input[type="file"] {
-      display: block;
-      margin: 1rem auto;
-    }
-
-    .upload-box button {
-      padding: 0.7rem 2rem;
-      background-color: #4749cc;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin: 0.5rem;
-    }
-
-    .upload-box button:hover {
-      background-color: #4749cc;
-    }
-
-    .file-details {
-      font-size: 0.9rem;
-      color: #444;
-      margin-top: 0.5rem;
-    }
-
-    .progress-bar {
-      width: 100%;
-      background-color: #f3f3f3;
-      border-radius: 6px;
-      overflow: hidden;
-      margin-top: 1rem;
-      display: none;
-    }
-
-    .progress-bar-fill {
-      height: 10px;
-      background-color: #28a745;
-      width: 0%;
-      transition: width 1s ease-in-out;
-    }
-
-    .file-icon {
-      font-size: 2rem;
-      margin-top: 0.5rem;
-    }
-
-    .footer {
-      text-align: center;
-      margin-top: 4rem;
-      color: #777;
-    }
-
-    @media screen and (max-width: 768px) {
-      .sidebar {
-        display: none;
-      }
-      .main-content {
-        margin-left: 0;
-        padding: 1rem;
-      }
-    }
-  </style>
 </head>
 <body>
-  <div class="dashboard-layout">
+  <div class="dashboard-container">
     <!-- Sidebar -->
     <aside class="sidebar">
-  <h1 class="logo">PitchBridge</h1>
-  <nav class="sidebar-nav">
-    <a href="homepage.html">🏠 Home</a>
-    <a href="investorDeck.html" class="active">💼 Investor Deck</a>
-    <a href="profile.html">👤 Profile</a> 
-    <a href="message.html">💬 Messages</a>
-    <a href="setting.html">⚙️ Settings</a>
-    <a href="FAQandHelpPage.html" class="nav-link">❓ FAQ / Help</a>
-    <a href="contact.html" class="nav-link">📞 Contact</a>
-    <a href="logout.html">🚪 Log Out</a>
-  </nav>
-</aside>
-
+      <div class="logo">PitchBridge</div>
+      <nav class="sidebar-nav">
+        <a href="homepage.html">🏠 Home</a>
+        <a href="pitchDeck.html" id="pitchDeckLink">📊 Pitch Deck</a>
+        <a href="investorDeck.html" id="investorDeckLink" class="active">💼 Investor Deck</a>
+        <a href="profile.html">👤 Profile</a> 
+        <a href="message.html">💬 Messages</a>
+        <a href="setting.html">⚙️ Settings</a>
+        <a href="FAQandHelpPage.html">❓ FAQ / Help</a>
+        <a href="dashboardContact.html">📞 Contact</a>
+        <a href="logout.html">🚪 Log Out</a>
+      </nav>
+    </aside>
 
     <!-- Main Content -->
-    <main class="main-content">
-      <h2 style="text-align: center;">Investor Deck</h2>
+    <div class="main-section">
+      <h2>Investor Interests</h2>
+      <p class="subheading">View and manage the list of investors interested in your startup.</p>
 
-      <div class="upload-box">
-        <p style="font-size: 1.1rem; color: #555;">
-          Upload your investor deck to showcase traction, business plans, and financials.
-        </p>
-
-        <input type="file" id="investorFile" accept=".pdf,.ppt,.pptx"/>
-        <div id="fileInfo" class="file-details">No file selected</div>
-        <div id="fileIcon" class="file-icon"></div>
-
-        <button onclick="handleUpload()">Upload Deck</button>
-        <button onclick="clearFile()" style="background-color: #dc3545;">Clear</button>
-
-        <div class="progress-bar" id="progressContainer">
-          <div class="progress-bar-fill" id="progressBar"></div>
-        </div>
-
-        <div id="uploadMessage" style="margin-top: 1rem; font-weight: bold;"></div>
+      <div class="upload-section">
+        <label for="investorFile" class="custom-file-upload">
+          <span id="investorFileName">Upload Investor Brief (PDF, max 5MB)</span>
+          <input type="file" id="investorFile" accept=".pdf" />
+        </label>
+        <button class="btn" onclick="uploadInvestorBrief()">Upload Brief</button>
       </div>
-
-      <footer class="footer">
-        <p>&copy; 2025 PitchBridge. All rights reserved.</p>
-      </footer>
-    </main>
+    </div>
   </div>
 
-  <script>
-    const fileInput = document.getElementById("investorFile");
-    const fileInfo = document.getElementById("fileInfo");
-    const uploadMessage = document.getElementById("uploadMessage");
-    const progressBar = document.getElementById("progressBar");
-    const progressContainer = document.getElementById("progressContainer");
-    const fileIcon = document.getElementById("fileIcon");
 
-    fileInput.addEventListener("change", () => {
-      const file = fileInput.files[0];
-      if (file) {
-        fileInfo.textContent = `File: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
-        if (file.type === "application/pdf") {
-          fileIcon.innerHTML = "📄 PDF File";
-        } else if (
-          file.type === "application/vnd.ms-powerpoint" ||
-          file.type === "application/vnd.openxmlformats-officedocument.presentationml.presentation"
-        ) {
-          fileIcon.innerHTML = "📊 PPT File";
-        } else {
-          fileIcon.innerHTML = "";
-        }
-      } else {
-        fileInfo.textContent = "No file selected";
-        fileIcon.innerHTML = "";
-      }
-    });
-
-    function handleUpload() {
-      const file = fileInput.files[0];
-      uploadMessage.textContent = "";
-      progressContainer.style.display = "none";
-      progressBar.style.width = "0%";
-
-      if (!file) {
-        uploadMessage.textContent = "Please select a file before uploading.";
-        uploadMessage.style.color = "red";
-        return;
-      }
-
-      const allowedTypes = [
-        'application/pdf',
-        'application/vnd.ms-powerpoint',
-        'application/vnd.openxmlformats-officedocument.presentationml.presentation'
-      ];
-
-      if (!allowedTypes.includes(file.type)) {
-        uploadMessage.textContent = "Only PDF or PPT files are allowed.";
-        uploadMessage.style.color = "red";
-        return;
-      }
-
-      if (file.size > 10 * 1024 * 1024) {
-        uploadMessage.textContent = "File size must be under 10MB.";
-        uploadMessage.style.color = "red";
-        return;
-      }
-
-      progressContainer.style.display = "block";
-      let progress = 0;
-      const interval = setInterval(() => {
-        progress += 10;
-        progressBar.style.width = progress + "%";
-        if (progress >= 100) {
-          clearInterval(interval);
-          uploadMessage.textContent = "Investor deck uploaded successfully!";
-          uploadMessage.style.color = "green";
-          localStorage.setItem("investorDeck", file.name);
-        }
-      }, 150);
-    }
-
-    function clearFile() {
-      fileInput.value = "";
-      fileInfo.textContent = "No file selected";
-      fileIcon.innerHTML = "";
-      uploadMessage.textContent = "";
-      progressBar.style.width = "0%";
-      progressContainer.style.display = "none";
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>

@@ -6,125 +6,24 @@
   <title>PitchBridge Dashboard</title>
   <link rel="stylesheet" href="style.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f4f4f4;
-      height: 100vh;
-      display: flex;
-    }
-
-    .dashboard-container {
-      display: flex;
-      width: 100%;
-      height: 100%;
-    }
-
-    .sidebar {
-      width: 240px;
-      background-color: #5D5FEF;
-      color: white;
-      padding: 2rem 1rem;
-      flex-shrink: 0;
-      height: 100vh;
-      position: fixed;
-      top: 0;
-      left: 0;
-    }
-
-    .sidebar-header {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-
-    .sidebar-nav {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .sidebar-nav .nav-link {
-      color: white;
-      text-decoration: none;
-      margin: 0.5rem 0;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      transition: background-color 0.3s;
-    }
-
-    .sidebar-nav .nav-link:hover {
-      background-color: #4749cc;
-    }
-
-    .main-section {
-      margin-left: 240px;
-      padding: 2rem;
-      flex: 1;
-      background-color: #ffffff;
-      overflow-y: auto;
-    }
-
-    .main-section h1 {
-      color: #333;
-      margin-bottom: 1.5rem;
-    }
-
-    .welcome-box {
-      background-color: #f9f9f9;
-      border-left: 5px solid #5D5FEF;
-      padding: 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    }
-
-    .welcome-box h2 {
-      color: #5D5FEF;
-      margin-bottom: 1rem;
-    }
-
-    .welcome-box ul {
-      list-style-type: none;
-      padding-left: 0;
-      line-height: 1.8;
-      color: #444;
-    }
-
-    .welcome-box ul li::before {
-      content: '👉';
-      margin-right: 0.5rem;
-      color: #5D5FEF;
-    }
-
-    .welcome-box p {
-      margin-top: 1rem;
-      color: #666;
-    }
-  </style>
 </head>
 <body>
   <div class="dashboard-container">
     <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="sidebar-header">PitchBridge</div>
-      <nav class="sidebar-nav">
-        <a href="homepage.html" class="nav-link">🏠 Home</a>
-        <a href="pitchDeck.html" class="nav-link" id="pitchDeckLink">📊 Pitch Deck</a>
-        <a href="investorDeck.html" class="nav-link" id="investorDeckLink">💼 Investor Deck</a>
-        <a href="profile.html" class="nav-link">👤 Profile</a>
-        <a href="message.html" class="nav-link">💬 Messages</a>
-        <a href="setting.html" class="nav-link">⚙️ Settings</a>
-        <a href="FAQandHelpPage.html" class="nav-link">❓ FAQ / Help</a>
-        <a href="contact.html" class="nav-link">📞 Contact</a>
-        <a href="logout.html" class="nav-link logout">🚪 Logout</a>
-      </nav>
-    </aside>
+<aside class="sidebar">
+  <div class="logo">PitchBridge</div>
+  <nav class="sidebar-nav">
+    <a href="homepage.html" class="nav-link">🏠 Home</a>
+    <a href="pitchDeck.html" class="nav-link" id="pitchDeckLink">📊 Pitch Deck</a>
+    <a href="investorDeck.html" class="nav-link" id="investorDeckLink">💼 Investor Deck</a>
+    <a href="profile.html" class="nav-link">👤 Profile</a>
+    <a href="message.html" class="nav-link">💬 Messages</a>
+    <a href="setting.html" class="nav-link">⚙️ Settings</a>
+    <a href="FAQandHelpPage.html" class="nav-link">❓ FAQ / Help</a>
+    <a href="dashboardContact.html" class="nav-link">📞 Contact</a>
+    <a href="logout.html" class="nav-link logout">🚪 Logout</a>
+  </nav>
+</aside>
 
     <!-- Main Content -->
     <main class="main-section">
@@ -143,21 +42,8 @@
     </main>
   </div>
 
- <!-- 🔐 Role-based Hiding Script -->
-<script>
-  window.addEventListener('DOMContentLoaded', () => {
-    const role = localStorage.getItem('userRole'); // 'startup' or 'investor'
-
-    if (role === 'startup') {
-      const investorDeck = document.getElementById('investorDeckLink');
-      if (investorDeck) investorDeck.style.display = 'none';
-    } else if (role === 'investor') {
-      const pitchDeck = document.getElementById('pitchDeckLink');
-      if (pitchDeck) pitchDeck.style.display = 'none';
-    }
-  });
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
+
 

@@ -3,36 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Logout - PitchBridge</title>
-  <link rel="stylesheet" href="style.css"/>
+  <title>PitchBridge - Chat</title>
+  <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
 </head>
 <body>
   <div class="dashboard-container">
     <!-- Sidebar -->
     <aside class="sidebar">
-      <div class="logo">PitchBridge</div>
+      <div class="sidebar-header">PitchBridge</div>
       <nav class="sidebar-nav">
         <a href="homepage.html" class="nav-link">🏠 Home</a>
         <a href="pitchDeck.html" class="nav-link" id="pitchDeckLink">📊 Pitch Deck</a>
         <a href="investorDeck.html" class="nav-link" id="investorDeckLink">💼 Investor Deck</a>
         <a href="profile.html" class="nav-link">👤 Profile</a>
-        <a href="message.html" class="nav-link">💬 Messages</a>
+        <a href="message.html" class="nav-link active">💬 Messages</a>
         <a href="setting.html" class="nav-link">⚙️ Settings</a>
         <a href="FAQandHelpPage.html" class="nav-link">❓ FAQ / Help</a>
-        <a href="dashboardContact.html">📞 Contact</a>
-        <a href="logout.html" class="nav-link active">🚪 Logout</a>
+        <a href="contact.html" class="nav-link">📞 Contact</a>
+        <a href="logout.html" class="nav-link logout">🚪 Logout</a>
       </nav>
     </aside>
 
-    <!-- Main Section -->
+    <!-- Chat Section -->
     <main class="main-section">
-      <div class="logout-container">
-        <h2>Are you sure you want to logout?</h2>
-        <div class="logout-buttons">
-          <a href="LoggedOut.html" class="btn logout">Yes, Logout</a>
-          <a href="dashboard.html" class="btn cancel">Cancel</a>
-        </div>
+      <div class="chat-header">
+        <img src="" alt="Avatar" id="chatAvatar" />
+        <h2 id="chatUserName">Chat</h2>
+      </div>
+
+      <div class="chat-box" id="chatBox">
+        <!-- Chat messages will appear here -->
+      </div>
+
+      <div class="chat-input-area">
+        <input type="text" id="chatInput" placeholder="Type your message..." />
+        <button id="sendBtn">Send</button>
       </div>
     </main>
   </div>

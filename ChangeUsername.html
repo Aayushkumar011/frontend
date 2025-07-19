@@ -1,48 +1,31 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Change Username - PitchBridge</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    .form-container {
-      max-width: 500px;
-      margin: 3rem auto;
-      background: #fff;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-      font-family: 'Inter', sans-serif;
-    }
-    label, input, button {
-      display: block;
-      width: 100%;
-      margin-bottom: 1rem;
-    }
-    input {
-      padding: 0.5rem;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-    button {
-      background-color: #5D5FEF;
-      color: white;
-      padding: 0.6rem;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-  </style>
 </head>
 <body>
   <div class="form-container">
     <h2>Change Username</h2>
-    <form>
+
+    <!-- Success Message -->
+    <div class="success-msg" id="successMsg">✅ Username updated successfully!</div>
+
+    <form id="usernameForm">
       <label for="newUsername">New Username</label>
-      <input type="text" id="newUsername" name="newUsername" required>
+      <input type="text" id="newUsername" name="newUsername" maxlength="20" required />
+      <div class="char-count" id="charCount">0 / 20</div>
+      <div class="error-msg" id="errorMsg">❗ Username must be at least 3 characters long.</div>
       <button type="submit">Update Username</button>
     </form>
+
+    <!-- Back to Settings Button -->
+     <a href="setting.html" class="cancel-btn">← Back to Settings</a>
   </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
+

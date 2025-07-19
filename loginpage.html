@@ -14,7 +14,7 @@
       <nav>
         <a href="HomePage.html">Home</a>
         <a href="SignUpPage.html">Sign Up</a>   
-        <a href="FAQandHelpPage.html">Help</a>
+        
       </nav>
     </div>
   </header>
@@ -23,18 +23,19 @@
     <div class="form-card">
       <h2 style="text-align:center; color:#007bff;">Welcome Back!</h2>
       <p style="text-align:center;">Login to continue to your dashboard</p>
+      
       <form class="signup-form">
         <div class="input-group">
           <img src="asset/email.gif" alt="Email Icon" />
           <input type="email" placeholder="Email" required />
         </div>
+
         <div class="input-group password-input">
           <img src="asset/lock.gif" alt="Password Icon" />
           <input type="password" placeholder="Password" id="loginPassword" required />
-          <img src="assets/eye.svg" alt="Toggle" id="toggleLoginPassword" class="toggle-password" />
+          <img src="asset/eye.svg" alt="Toggle" id="toggleLoginPassword" class="toggle-password" />
         </div>
 
-                
         <div class="input-group">
           <label for="loginRole" style="margin-bottom: 5px; font-weight: 600;">Select Role:</label>
           <select id="loginRole" required style="
@@ -55,59 +56,23 @@
           </select>
         </div>
 
-
-
         <button type="submit" class="btn">Login</button>
+      </form> 
 
-
-        <div class="form-links" style="text-align: center; margin-top: 1rem;">
+      <div class="form-links" style="text-align: center; margin-top: 1rem;">
         <a href="ForgotPassword.html" class="form-link-blue">Forgot Password?</a>
-        </div>
-
-      <div class="form-links" style="text-align:center; margin-top: 1rem;">
-      Don’t have an account? <a href="SignUpPage.html" class="form-link-blue">Sign up here</a>
       </div>
 
+      <div class="form-links" style="text-align:center; margin-top: 1rem;">
+        Don’t have an account? <a href="SignUpPage.html" class="form-link-blue">Sign up here</a>
+      </div>
+    </div>
   </main>
 
   <footer class="footer">
     <p>&copy; 2025 PitchBridge. All rights reserved.</p>
   </footer>
 
-  <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const toggle = document.getElementById("toggleLoginPassword");
-    const pwd = document.getElementById("loginPassword");
-
-    toggle.addEventListener("click", () => {
-      const type = pwd.getAttribute("type") === "password" ? "text" : "password";
-      pwd.setAttribute("type", type);
-      toggle.src = type === "password" ? "assets/eye.svg" : "assets/eye-off.svg";
-    });
-
-    const form = document.querySelector(".signup-form");
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-
-      const role = document.getElementById("loginRole").value;
-      if (!role) {
-        alert("Please select your role.");
-        return;
-      }
-
-      // ✅ Store login status
-      localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("userRole", role);
-
-      // ✅ Redirect to dashboard
-      window.location.href = "dashboard.html";
-    });
-  });
-</script>
-
-
-
+  <script src="script.js"></script>
 </body>
 </html>
-
-

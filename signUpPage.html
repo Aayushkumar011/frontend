@@ -14,7 +14,6 @@
       <nav>
         <a href="homepage.html">Home</a>
         <a href="loginpage.html">Login</a>
-        <a href="FAQandHelpPage.html">Help</a>
       </nav>
     </div>
   </header>
@@ -115,59 +114,7 @@
     &copy; 2025 PitchBridge. All rights reserved.
   </footer>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const startupBtn = document.getElementById("startupBtn");
-      const investorBtn = document.getElementById("investorBtn");
-      const startupFields = document.querySelector(".startup-fields");
-      const investorFields = document.querySelector(".investor-fields");
-      const roleField = document.getElementById("roleField");
-
-      startupBtn.addEventListener("click", () => {
-        startupFields.classList.add("visible");
-        investorFields.classList.remove("visible");
-        startupBtn.classList.add("active");
-        investorBtn.classList.remove("active");
-        roleField.value = "startup";
-      });
-
-      investorBtn.addEventListener("click", () => {
-        investorFields.classList.add("visible");
-        startupFields.classList.remove("visible");
-        investorBtn.classList.add("active");
-        startupBtn.classList.remove("active");
-        roleField.value = "investor";
-      });
-
-      document.getElementById("signupForm").addEventListener("submit", (e) => {
-        const password = document.getElementById("password").value;
-        const confirmPassword = document.getElementById("confirmPassword").value;
-        const errorMsg = document.getElementById("errorMessage");
-        const role = roleField.value;
-
-        if (password !== confirmPassword) {
-          e.preventDefault();
-          errorMsg.textContent = "Passwords do not match.";
-        } else {
-          errorMsg.textContent = "";
-          localStorage.setItem("userRole", role); // ✅ Save role
-          e.preventDefault(); // Prevent real submit for demo
-          window.location.href = "dashboard.html"; // ✅ Redirect
-        }
-      });
-    });
-
-    function togglePassword(inputId, iconId) {
-      const input = document.getElementById(inputId);
-      const icon = document.getElementById(iconId);
-      if (input.type === "password") {
-        input.type = "text";
-        icon.src = "asset/eye-off.svg";
-      } else {
-        input.type = "password";
-        icon.src = "asset/eye.svg";
-      }
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
+

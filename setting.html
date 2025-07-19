@@ -6,164 +6,66 @@
   <title>Settings - PitchBridge</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      display: flex;
-      height: 100vh;
-      background-color: #f5f6fa;
-    }
-
-    .sidebar {
-      width: 220px;
-      background-color:  #5D5FEF;
-      color: white;
-      padding: 1.5rem 1rem;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    .sidebar .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-
-    .sidebar-nav a {
-      display: block;
-      padding: 10px 15px;
-      margin: 0.2rem 0;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: 500;
-      transition: background 0.3s ease;
-    }
-
-    .sidebar-nav a:hover,
-    .sidebar-nav a.active {
-      background-color: #4749cc;
-    }
-
-    .main-content {
-      flex: 1;
-      padding: 2rem;
-      overflow-y: auto;
-    }
-
-    .settings-container {
-      max-width: 600px;
-      margin: 0 auto;
-      background: #ffffff;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    }
-
-    .settings-option {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.2rem;
-      padding-bottom: 0.8rem;
-      border-bottom: 1px solid #eee;
-    }
-
-    .settings-option a {
-      background-color: #5D5FEF;
-      color: white;
-      text-decoration: none;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-weight: 600;
-      transition: background-color 0.3s ease;
-    }
-
-    .settings-option a:hover {
-      background-color: #4749cc;
-    }
-
-    @media (max-width: 768px) {
-      .settings-container {
-        margin: 1rem;
-        padding: 1.5rem;
-      }
-
-      .settings-option {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .settings-option a {
-        margin-top: 0.5rem;
-      }
-    }
-  </style>
 </head>
 <body>
-  <!-- Sidebar Navigation -->
-  <aside class="sidebar">
-    <div class="logo">PitchBridge</div>
-    <nav class="sidebar-nav">
-      <a href="homepage.html">🏠 Home</a>
-      <a href="pitchDeck.html" id="pitchDeckLink" style="display: none;">📊 Pitch Deck</a>
-      <a href="investorDeck.html" id="investorDeckLink" style="display: none;">💼 Investor Deck</a>
-      <a href="profile.html">👤 Profile</a>
-      <a href="message.html">💬 Messages</a>
-      <a href="setting.html" class="active">⚙️ Settings</a>
-      <a href="FAQandHelpPage.html">❓ FAQ / Help</a>
-      <a href="contact.html">📞 Contact</a>
-      <a href="logout.html">🚪 Logout</a>
-    </nav>
-  </aside>
+  <!-- Wrapper to apply flex only for settings layout -->
+  <div class="settings-wrapper">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="logo">PitchBridge</div>
+      <nav class="sidebar-nav">
+        <a href="homepage.html">🏠 Home</a>
+        <a href="pitchDeck.html" id="pitchDeckLink" style="display: none;">📊 Pitch Deck</a>
+        <a href="investorDeck.html" id="investorDeckLink" style="display: none;">💼 Investor Deck</a>
+        <a href="profile.html">👤 Profile</a>
+        <a href="message.html">💬 Messages</a>
+        <a href="setting.html" class="active">⚙️ Settings</a>
+        <a href="FAQandHelpPage.html">❓ FAQ / Help</a>
+        <a href="dashboardContact.html">📞 Contact</a>
+        <a href="logout.html">🚪 Logout</a>
+      </nav>
+    </aside>
 
-  <!-- Main Content -->
-  <main class="main-content">
-    <h2 style="text-align:center; margin-bottom: 2rem; color:#333;">Account Settings</h2>
-    <div class="settings-container">
-      <div class="settings-option">
-        <span>Update your username</span>
-        <a href="changeUsername.html">Change</a>
+    <!-- Main Content -->
+    <main class="main-section">
+      <h2 class="settings-title">Account Settings</h2>
+      <div class="settings-container">
+        <div class="settings-option">
+          <span>Update your username</span>
+          <a href="changeUsername.html">Change</a>
+        </div>
+        <div class="settings-option">
+          <span>Update your password</span>
+          <a href="changePassword.html">Change</a>
+        </div>
+        <div class="settings-option">
+          <span>Update your email</span>
+          <a href="changeEmail.html">Change</a>
+        </div>
+        <div class="settings-option">
+          <span>Update profile picture</span>
+          <a href="changeProfilePicture.html">Change</a>
+        </div>
+        <div class="settings-option">
+          <span>Manage notification preferences</span>
+          <a href="notifications.html">Update</a>
+        </div>
+        <div class="settings-option">
+          <span>Adjust privacy settings</span>
+          <a href="privacy.html">Update</a>
+        </div>
+        <div class="settings-option">
+          <span class="delete-warning">Delete or deactivate your account</span>
+          <a href="deleteAccount.html" class="delete-btn">Delete</a>
+        </div>
       </div>
-      <div class="settings-option">
-        <span>Update your password</span>
-        <a href="changePassword.html">Change</a>
-      </div>
-      <div class="settings-option">
-        <span>Update your email</span>
-        <a href="changeEmail.html">Change</a>
-      </div>
-      <div class="settings-option">
-        <span>Update profile picture</span>
-        <a href="changeProfile.html">Change</a>
-      </div>
-      <div class="settings-option">
-        <span>Manage notification preferences</span>
-        <a href="notification.html">Update</a>
-      </div>
-      <div class="settings-option">
-        <span>Adjust privacy settings</span>
-        <a href="privacy.html">Update</a>
-      </div>
-      <div class="settings-option">
-        <span style="color: red; font-weight: bold;">Delete or deactivate your account</span>
-        <a href="deleteAccount.html" style="background-color: red;">Delete</a>
-      </div>
-    </div>
-  </main>
+    </main>
 
-  <!-- JS to Show/Hide PitchDeck/InvestorDeck -->
-  <script>
-    const userRole = localStorage.getItem('userRole'); // 'startup' or 'investor'
+  </div> <!-- End of .settings-wrapper -->
 
-    if (userRole === 'startup') {
-      document.getElementById('pitchDeckLink').style.display = 'block';
-    } else if (userRole === 'investor') {
-      document.getElementById('investorDeckLink').style.display = 'block';
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
+
+

@@ -5,58 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Logged Out - PitchBridge</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f5f5f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-
-    .logout-message-box {
-      background: #fff;
-      padding: 2rem 3rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-
-    .logout-message-box h2 {
-      color: #333;
-      margin-bottom: 1rem;
-    }
-
-    .logout-message-box p {
-      color: #666;
-      margin-bottom: 2rem;
-    }
-
-    .button-group {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .logout-message-box a {
-      text-decoration: none;
-      background-color: #5D5FEF;
-      color: #fff;
-      padding: 0.6rem 1.5rem;
-      border-radius: 8px;
-      font-weight: 600;
-      transition: background-color 0.3s ease;
-    }
-
-    .logout-message-box a:hover {
-      background-color: #4749cc;
-    }
-  </style>
 </head>
-<body>
+<body class="logout">
+
   <div class="logout-message-box">
     <h2>You have been logged out.</h2>
     <p>Thank you for using PitchBridge.</p>
@@ -65,5 +16,6 @@
       <a href="loginpage.html">Login</a>
     </div>
   </div>
+  <script src="script.js"></script>
 </body>
 </html>
