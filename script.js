@@ -1,65 +1,132 @@
 // ===== SIGNUP PAGE SCRIPT =====
-
-// Toggle password visibility
-function togglePassword(fieldId, eyeIconId) {
-  const field = document.getElementById(fieldId);
-  const eyeIcon = document.getElementById(eyeIconId);
-  if (field && eyeIcon) {
-    if (field.type === "password") {
-      field.type = "text";
-      eyeIcon.src = "asset/eye-off.svg";
-    } else {
-      field.type = "password";
-      eyeIcon.src = "asset/eye.svg";
-    }
-  }
-}
-
-// Role switching logic
-document.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("load", () => {
   const startupBtn = document.getElementById("startupBtn");
   const investorBtn = document.getElementById("investorBtn");
   const startupFields = document.querySelector(".startup-fields");
   const investorFields = document.querySelector(".investor-fields");
   const roleField = document.getElementById("roleField");
-
-  if (startupBtn && investorBtn && roleField) {
-    startupBtn.addEventListener("click", () => {
-      startupBtn.classList.add("active");
-      investorBtn.classList.remove("active");
-      if (startupFields) startupFields.classList.add("visible");
-      if (investorFields) investorFields.classList.remove("visible");
-      roleField.value = "startup";
-    });
-
-    investorBtn.addEventListener("click", () => {
-      investorBtn.classList.add("active");
-      startupBtn.classList.remove("active");
-      if (investorFields) investorFields.classList.add("visible");
-      if (startupFields) startupFields.classList.remove("visible");
-      roleField.value = "investor";
-    });
-  }
-
-  // Password match validation
   const form = document.getElementById("signupForm");
   const errorMessage = document.getElementById("errorMessage");
 
-  if (form) {
-    form.addEventListener("submit", function (e) {
-      const password = document.getElementById("password")?.value;
-      const confirmPassword = document.getElementById("confirmPassword")?.value;
-      if (password !== confirmPassword) {
-        e.preventDefault();
-        if (errorMessage) errorMessage.textContent = "Passwords do not match.";
+  // ====== ROLE TOGGLE FUNCTION ======
+  function setRole(role) {
+    if (!roleField) return;
+
+    // Update hidden field
+    roleField.value = role;
+
+    // Update UI and localStorage
+    if (role === "startup") {
+      startupBtn?.classList.add("active");
+      investorBtn?.classList.remove("active");
+      startupFields && (startupFields.style.display = "block");
+      investorFields && (investorFields.style.display = "none");
+
+      // ✅ Set required only for visible fields
+      toggleRequired(startupFields, true);
+      toggleRequired(investorFields, false);
+    } else if (role === "investor") {
+      investorBtn?.classList.add("active");
+      startupBtn?.classList.remove("active");
+      investorFields && (investorFields.style.display = "block");
+      startupFields && (startupFields.style.display = "none");
+
+      // ✅ Set required only for visible fields
+      toggleRequired(startupFields, false);
+      toggleRequired(investorFields, true);
+    }
+
+    localStorage.setItem("userRole", role);
+
+    // ✅ Debug logs
+    console.log("Role set to:", role);
+    console.log("Startup fields visible:", startupFields?.style.display);
+    console.log("Investor fields visible:", investorFields?.style.display);
+    console.log("Role field value:", roleField.value);
+  }
+
+  // ✅ Helper: Set required dynamically
+  function toggleRequired(container, required) {
+    if (!container) return;
+    const inputs = container.querySelectorAll("input, select, textarea");
+    inputs.forEach((input) => {
+      if (required) {
+        input.setAttribute("required", "required");
       } else {
-        if (errorMessage) errorMessage.textContent = "";
+        input.removeAttribute("required");
       }
     });
   }
-});
-// ===== SIGNUP PAGE SCRIPT ENDS =====
 
+  // ✅ Set default on load
+  setRole("startup");
+
+  // ✅ Role selection button events
+  startupBtn?.addEventListener("click", (e) => {
+    e.preventDefault();
+    setRole("startup");
+  });
+
+  investorBtn?.addEventListener("click", (e) => {
+    e.preventDefault();
+    setRole("investor");
+  });
+
+  // ===== PASSWORD TOGGLE FUNCTION =====
+  function togglePassword(fieldId, eyeIconId) {
+    const field = document.getElementById(fieldId);
+    const eyeIcon = document.getElementById(eyeIconId);
+    if (!field || !eyeIcon) return;
+
+    const showing = field.type === "text";
+    field.type = showing ? "password" : "text";
+
+    // Gracefully handle missing icons
+    if (eyeIcon.src.includes("eye.svg") || eyeIcon.src.includes("eye-off.svg")) {
+      eyeIcon.src = showing ? "asset/eye.svg" : "asset/eye-off.svg";
+    }
+  }
+
+  window.togglePassword = togglePassword; // Make accessible globally
+
+  // ===== FORM VALIDATION =====
+  form?.addEventListener("submit", (e) => {
+    const selectedRole = roleField?.value;
+    const password = document.getElementById("password")?.value;
+    const confirmPassword = document.getElementById("confirmPassword")?.value;
+
+    console.log("Submitting as:", selectedRole);
+
+    if (!selectedRole) {
+      e.preventDefault();
+      if (errorMessage) {
+        errorMessage.textContent = "Please select your role.";
+        errorMessage.style.display = "block";
+      }
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      e.preventDefault();
+      if (errorMessage) {
+        errorMessage.textContent = "Passwords do not match.";
+        errorMessage.style.display = "block";
+      }
+      return;
+    }
+
+    // ✅ Store info and redirect
+    localStorage.setItem("isSignedUp", "true");
+    localStorage.setItem("userRole", selectedRole);
+
+    if (errorMessage) {
+      errorMessage.textContent = "";
+      errorMessage.style.display = "none";
+    }
+
+    window.location.href = "loginpage.html";
+  });
+});
 
 // ===== LOGIN PAGE SCRIPT START =====
 document.addEventListener("DOMContentLoaded", () => {
@@ -79,19 +146,32 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
 
+      const email = document.getElementById("loginEmail")?.value.trim();
+      const password = document.getElementById("loginPassword")?.value.trim();
       const role = document.getElementById("loginRole")?.value;
-      if (!role) {
-        alert("Please select your role.");
+
+      const errorMessage = document.getElementById("errorMessage");
+
+      if (!email || !password || !role) {
+        if (errorMessage) {
+          errorMessage.textContent = "Please fill all fields and select your role.";
+          errorMessage.style.display = "block";
+        }
         return;
       }
 
+      // ✅ Save to localStorage
       localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("user", email);         // ✅ This fixes null issue
       localStorage.setItem("userRole", role);
+
+      // Redirect to dashboard
       window.location.href = "dashboard.html";
     });
   }
 });
 // ===== LOGIN PAGE SCRIPT END =====
+
 
 
 // ===== DASHBOARD PAGE SCRIPT START =====
@@ -172,15 +252,23 @@ function uploadInvestorBrief() {
 
 
 // ===== PROFILE CONTENT INJECTION =====
-// ===== PROFILE CONTENT INJECTION =====
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("profileContent");
   const user = localStorage.getItem("user");
   const role = localStorage.getItem("userRole");
 
-  if (!container) return;
+  if (!container) return; // Only run on profile page
 
-  if (!user) {
+  if (user && role) {
+    container.innerHTML = `
+      <div class="profile-details">
+        <h2>👋 Welcome back, ${user}!</h2>
+        <p><strong>Role:</strong> ${role.charAt(0).toUpperCase() + role.slice(1)}</p>
+        <p>Your profile is currently basic. More features will appear here after backend integration.</p>
+        <a href="logout.html" class="btn">Log Out</a>
+      </div>
+    `;
+  } else {
     container.innerHTML = `
       <div class="profile-empty">
         <h2>You have no profile yet.</h2>
@@ -191,26 +279,20 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       </div>
     `;
-  } else {
-    container.innerHTML = `
-      <div class="profile-details">
-        <h2>👋 Welcome back, ${user}!</h2>
-        <p><strong>Role:</strong> ${role ? role.charAt(0).toUpperCase() + role.slice(1) : "N/A"}</p>
-        <p>Your profile is currently basic. More features will appear here after backend integration.</p>
-        <a href="logout.html" class="btn">Log Out</a>
-      </div>
-    `;
   }
 
-  // Show relevant links in sidebar
+  // Dynamically control sidebar visibility
   const pitchLink = document.getElementById("pitchDeckLink");
   const investorLink = document.getElementById("investorDeckLink");
 
-  if (role === "startup" && pitchLink) pitchLink.style.display = "block";
-  if (role === "investor" && investorLink) investorLink.style.display = "block";
+  if (role === "startup" && pitchLink) {
+    pitchLink.style.display = "block";
+  } else if (role === "investor" && investorLink) {
+    investorLink.style.display = "block";
+  }
 });
-
 // ===== PROFILE CONTENT INJECTION END =====
+
 
 
 

@@ -485,6 +485,16 @@ nav a {
 .custom-file-upload input[type="file"] {
   display: none;
 }
+.startup-fields,
+.investor-fields {
+  display: none;
+}
+
+.startup-fields.visible,
+.investor-fields.visible {
+  display: block;
+}
+
 
 /* ===== SIGNUP PAGE STYLES ENDS ===== */
 
@@ -875,27 +885,35 @@ nav a {
 .chat-input-area {
   display: flex;
   gap: 0.5rem;
-  padding: 1rem;
+  padding: 0.8rem 1rem;
   border-top: 1px solid #ddd;
   background: #fff;
+  align-items: center;
 }
 
 .chat-input-area input {
   flex: 1;
-  padding: 0.7rem;
+  padding: 0.9rem 1.2rem;
   border: 1px solid #ccc;
   border-radius: 20px;
+  font-size: 1rem;
   outline: none;
 }
 
 .chat-input-area button {
-  padding: 0.7rem 1.2rem;
-  border: none;
+  padding: 0.4rem;
+  font-size: 0.8rem;
   background: #6c5ce7;
   color: white;
-  border-radius: 20px;
+  border: none;
+  border-radius: 16px;
   cursor: pointer;
+  width: 60px;      /* Fixed smaller width */
+  height: 36px;
 }
+
+
+
 /* === MESSAGE END === */
 
 /* === SETTING STARTS === */

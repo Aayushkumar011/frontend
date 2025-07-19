@@ -1,3 +1,4 @@
+<!-- Save this as signup.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +7,8 @@
   <title>PitchBridge - Sign Up</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
 </head>
 <body>
   <header class="header">
@@ -21,16 +24,17 @@
   <main>
     <div class="form-card">
       <h2 style="text-align:center; color:#007bff;">Sign Up</h2>
-
+      
       <div class="role-selection">
-        <button id="startupBtn" class="active">Startup</button>
-        <button id="investorBtn">Investor</button>
-      </div>
+      <button id="startupBtn" class="active" type="button">Startup</button>
+      <button id="investorBtn" type="button">Investor</button>
+    </div>
 
       <form id="signupForm" class="signup-form" method="POST" action="#">
-        <input type="hidden" name="role" id="roleField" value="startup" />
+        <input type="hidden" id="roleField" name="role" value="">
 
-        <!-- Common Fields -->
+
+        <!-- 👤 Common fields -->
         <div class="input-group">
           <img src="asset/user.gif" alt="User Icon">
           <input type="text" name="fullName" placeholder="Full Name" required />
@@ -41,44 +45,42 @@
           <input type="email" name="email" placeholder="Email" required />
         </div>
 
-        <!-- Password Field -->
         <div class="input-group password-group">
           <img src="asset/lock.gif" alt="Password Icon">
-          <input type="password" placeholder="Password" id="password" required />
+          <input type="password" name="password" placeholder="Password" id="password" required />
           <span class="toggle-password" onclick="togglePassword('password', 'eyeIcon1')">
             <img id="eyeIcon1" src="asset/eye.svg" alt="Toggle Eye" />
           </span>
         </div>
 
-        <!-- Confirm Password Field -->
         <div class="input-group password-group">
           <img src="asset/lock.gif" alt="Confirm Password Icon">
-          <input type="password" placeholder="Confirm Password" id="confirmPassword" required />
+          <input type="password" name="confirmPassword" placeholder="Confirm Password" id="confirmPassword" required />
           <span class="toggle-password" onclick="togglePassword('confirmPassword', 'eyeIcon2')">
             <img id="eyeIcon2" src="asset/eye.svg" alt="Toggle Eye" />
           </span>
         </div>
 
-        <!-- Startup-specific Fields -->
+        <!-- 🚀 Startup-specific fields -->
         <div class="startup-fields visible">
           <div class="input-group">
             <img src="asset/idea.gif" alt="Idea Icon">
-            <textarea name="startupIdea" placeholder="Your Startup Idea" required></textarea>
+            <textarea name="startupIdea" placeholder="Your Startup Idea" ></textarea>
           </div>
 
           <div class="input-group">
             <img src="asset/team.gif" alt="Team Size Icon">
-            <input type="number" name="teamSize" placeholder="Team Size" required />
+            <input type="number" name="teamSize" placeholder="Team Size" />
           </div>
 
           <div class="input-group">
             <img src="asset/stair.gif" alt="Stage Icon">
-            <input type="text" name="startupStage" placeholder="Startup Stage (e.g., MVP, Scaling)" required />
+            <input type="text" name="startupStage" placeholder="Startup Stage (e.g., MVP, Scaling)"/>
           </div>
         </div>
 
-        <!-- Investor-specific Fields -->
-        <div class="investor-fields">
+        <!-- 💼 Investor-specific fields -->
+        <div class="investor-fields" style="display: none;">
           <div class="input-group">
             <img src="asset/coin.gif" alt="Budget Icon">
             <input type="text" name="budget" placeholder="Investment Budget (e.g., $10k - $100k)" />
@@ -95,7 +97,7 @@
           </div>
         </div>
 
-        <!-- Terms & Conditions -->
+        <!-- ✅ Terms & error -->
         <div class="checkbox-group">
           <label>
             <input type="checkbox" id="terms" required />
@@ -103,8 +105,9 @@
           </label>
         </div>
 
-        <div class="error-msg" id="errorMessage"></div>
+        <div id="errorMessage" class="error-message" style="display: none;"></div>
 
+        <!-- 🚀 Submit -->
         <button type="submit" class="btn">Create Account</button>
       </form>
     </div>
@@ -117,4 +120,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-

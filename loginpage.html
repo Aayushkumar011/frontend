@@ -3,75 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PitchBridge - Login</title>
+  <title>Login - PitchBridge</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="header">
-    <div class="nav-container">
-      <h1 class="logo">PitchBridge</h1>
-      <nav>
-        <a href="HomePage.html">Home</a>
-        <a href="SignUpPage.html">Sign Up</a>   
-        
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <div class="form-card">
-      <h2 style="text-align:center; color:#007bff;">Welcome Back!</h2>
-      <p style="text-align:center;">Login to continue to your dashboard</p>
+  <div class="form-card">
+    <h2 style="text-align: center;">Login to PitchBridge</h2>
+    <form class="signup-form">
       
-      <form class="signup-form">
-        <div class="input-group">
-          <img src="asset/email.gif" alt="Email Icon" />
-          <input type="email" placeholder="Email" required />
-        </div>
-
-        <div class="input-group password-input">
-          <img src="asset/lock.gif" alt="Password Icon" />
-          <input type="password" placeholder="Password" id="loginPassword" required />
-          <img src="asset/eye.svg" alt="Toggle" id="toggleLoginPassword" class="toggle-password" />
-        </div>
-
-        <div class="input-group">
-          <label for="loginRole" style="margin-bottom: 5px; font-weight: 600;">Select Role:</label>
-          <select id="loginRole" required style="
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            width: 100%;
-            font-size: 1rem;
-            background-color: #f9f9f9;
-            color: #333;
-            font-family: 'Inter', sans-serif;
-            outline: none;
-            transition: border-color 0.3s ease;
-          ">
-            <option value="">Choose your role</option>
-            <option value="startup">Startup</option>
-            <option value="investor">Investor</option>
-          </select>
-        </div>
-
-        <button type="submit" class="btn">Login</button>
-      </form> 
-
-      <div class="form-links" style="text-align: center; margin-top: 1rem;">
-        <a href="ForgotPassword.html" class="form-link-blue">Forgot Password?</a>
+      <!-- Email -->
+      <div class="input-group">
+        <img src="asset/email.gif" alt="email icon" />
+        <input type="email" id="loginEmail" placeholder="Email" required />
       </div>
 
-      <div class="form-links" style="text-align:center; margin-top: 1rem;">
-        Don’t have an account? <a href="SignUpPage.html" class="form-link-blue">Sign up here</a>
+      <!-- Password -->
+      <div class="input-group password-input">
+        <img src="asset/lock.gif" alt="password icon" />
+        <input type="password" id="loginPassword" placeholder="Password" required />
+        <img src="asset/eye.svg" alt="Toggle" id="toggleLoginPassword" class="toggle-password" />
       </div>
-    </div>
-  </main>
 
-  <footer class="footer">
-    <p>&copy; 2025 PitchBridge. All rights reserved.</p>
-  </footer>
+      <!-- Role selection -->
+      <div class="input-group">
+        <img src="asset/user.gif" alt="role icon" />
+        <select id="loginRole" required style="border: none; outline: none; background: transparent; width: 100%; font-size: 1rem;">
+          <option value="">Select Role</option>
+          <option value="startup">Startup</option>
+          <option value="investor">Investor</option>
+        </select>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="btn">Login</button>
+
+      <!-- Error Message -->
+      <div id="errorMessage" class="error-message" style="color: red; text-align: center; display: none;"></div>
+    </form>
+  </div>
 
   <script src="script.js"></script>
 </body>
