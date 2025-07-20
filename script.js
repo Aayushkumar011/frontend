@@ -188,12 +188,16 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 // ===== DASHBOARD PAGE SCRIPT END =====
+// ========== Shared Utilities ==========
+function toggleFilter() {
+  const panel = document.getElementById("filterPanel");
+  if (panel) {
+    panel.style.display = panel.style.display === "block" ? "none" : "block";
+  }
+}
 
-
-// ===== PITCHDECK & INVESTORDECK PAGE SCRIPT START =====
 (() => {
   const role = localStorage.getItem("userRole");
-
   const path = window.location.href;
 
   if (path.includes("pitchDeck.html") && role !== "startup") {
@@ -217,38 +221,169 @@ window.addEventListener("DOMContentLoaded", () => {
     if (investorLink) investorLink.style.display = "block";
   }
 })();
-// ===== PITCHDECK & INVESTORDECK PAGE SCRIPT END =====
+
+// ========== PitchDeck Specific ==========
+function filterInvestors() {
+  const sector = document.getElementById("filterSector")?.value || "";
+  const region = document.getElementById("filterRegion")?.value || "";
+  const stage = document.getElementById("filterStage")?.value || "";
+  const ticket = document.getElementById("filterTicket")?.value || "";
+  const dealFlow = document.getElementById("dealFlow")?.value.toLowerCase() || "";
+  const firmType = document.getElementById("firmType")?.value.toLowerCase() || "";
+  const country = document.getElementById("country")?.value.toLowerCase() || "";
+
+  const cards = document.querySelectorAll(".investor-cards .card");
+
+  cards.forEach(card => {
+    const content = card.textContent;
+    const cardDeal = card.getAttribute("data-deal-flow") || "";
+    const cardFirm = card.getAttribute("data-firm-type") || "";
+    const cardCountry = card.getAttribute("data-country") || "";
+
+    const matches = [
+      !sector || content.includes(sector),
+      !region || content.includes(region),
+      !stage || content.includes(stage),
+      !ticket || content.includes(ticket),
+      !dealFlow || cardDeal.toLowerCase() === dealFlow,
+      !firmType || cardFirm.toLowerCase() === firmType,
+      !country || cardCountry.toLowerCase() === country
+    ];
+
+    card.style.display = matches.every(Boolean) ? "block" : "none";
+  });
+}
+
+function showAllInvestors() {
+  document.getElementById("searchInput").value = "";
+  clearFilters(); // ✅ Fix
+  document.querySelectorAll(".investor-cards .card").forEach(card => {
+    card.style.display = "block";
+  });
+}
 
 
-// ===== INVESTOR FILE UPLOAD VALIDATION SCRIPT START =====
-function uploadInvestorBrief() {
-  const fileInput = document.getElementById("investorFile");
-  const file = fileInput?.files[0];
+function searchInvestors() {
+  const input = document.getElementById("searchInput")?.value.toLowerCase().trim() || "";
+  const cards = document.querySelectorAll(".investor-cards .card");
+  cards.forEach(card => {
+    const name = card.querySelector("h3").textContent.toLowerCase();
+    card.style.display = name.includes(input) ? "block" : "none";
+  });
+}
 
-  if (!file) {
-    alert("Please select a file first.");
-    return;
+// ========== InvestorDeck Specific ==========
+function filterStartups() {
+  const sector = document.getElementById("filterSector")?.value.toLowerCase() || "";
+  const stage = document.getElementById("filterStage")?.value.toLowerCase() || "";
+  const location = document.getElementById("filterLocation")?.value.toLowerCase() || "";
+  const query = document.getElementById("searchInput")?.value.toLowerCase() || "";
+
+  const cards = document.querySelectorAll("#startupCards .card");
+
+  cards.forEach(card => {
+    const cardSector = card.getAttribute("data-sector")?.toLowerCase() || "";
+    const cardStage = card.getAttribute("data-stage")?.toLowerCase() || "";
+    const cardLocation = card.getAttribute("data-location")?.toLowerCase() || "";
+    const cardName = card.querySelector("h3").textContent.toLowerCase();
+
+    const match = [
+      !sector || cardSector === sector,
+      !stage || cardStage === stage,
+      !location || cardLocation === location,
+      !query || cardName.includes(query)
+    ];
+
+    card.style.display = match.every(Boolean) ? "block" : "none";
+  });
+}
+
+function showAllStartups() {
+  document.getElementById("searchInput").value = "";
+  clearFilters(); // ✅ Fix
+  document.querySelectorAll("#startupCards .card").forEach(card => {
+    card.style.display = "block";
+  });
+}
+
+
+function searchStartups() {
+  filterStartups();
+}
+
+function approachStartup(startupName) {
+  localStorage.setItem("selectedStartup", startupName);
+  window.location.href = "approachInvestment.html";
+}
+
+
+
+// ========== Static Stats Update ==========
+window.addEventListener("DOMContentLoaded", () => {
+  if (document.getElementById("verifiedInvestors")) {
+    document.getElementById("verifiedInvestors").innerText = 124;
+    document.getElementById("activeFundings").innerText = 38;
+    document.getElementById("dealsClosed").innerText = 19;
+    document.getElementById("startupsOnboarded").innerText = 312;
   }
 
-  const allowedTypes = ["application/pdf"];
-  if (!allowedTypes.includes(file.type)) {
-    alert("Only PDF files are allowed.");
-    return;
+  if (document.getElementById("totalStartups")) {
+    document.getElementById("totalStartups").innerText = 3121;
+    document.getElementById("pitchesReviewed").innerText = 6850;
+    document.getElementById("investmentsMade").innerText = 521;
+    document.getElementById("messagesSent").innerText = 14220;
   }
 
-  if (file.size > 5 * 1024 * 1024) {
-    alert("File too large! Max 5MB allowed.");
-    return;
+  if (typeof lucide !== "undefined") {
+    lucide.createIcons();
+  }
+});
+function clearFilters() {
+  const isPitchDeck = window.location.href.includes("pitchDeck.html");
+  const isInvestorDeck = window.location.href.includes("investorDeck.html");
+
+  console.log("Clear button clicked");
+
+  if (isInvestorDeck) {
+    // Investor is viewing startups → use startup filters
+    const pitchFilters = ["filterSector", "filterStage", "filterLocation"];
+    pitchFilters.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        console.log(`Clearing ${id}, was: ${el.value}`);
+        el.value = "";
+      } else {
+        console.warn(`Element not found: ${id}`);
+      }
+    });
+    filterStartups();
   }
 
-  alert(`File "${file.name}" uploaded successfully!`);
-
-  const nameDisplay = document.getElementById("fileNameDisplay");
-  if (nameDisplay) {
-    nameDisplay.textContent = `Uploaded: ${file.name}`;
+  if (isPitchDeck) {
+    // Startup is viewing investors → use investor filters
+    const investorFilters = [
+      "filterSector",
+      "filterRegion",
+      "filterStage",
+      "filterTicket",
+      "dealFlow",
+      "firmType",
+      "country"
+    ];
+    investorFilters.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        console.log(`Clearing ${id}, was: ${el.value}`);
+        el.value = "";
+      } else {
+        console.warn(`Element not found: ${id}`);
+      }
+    });
+    filterInvestors();
   }
 }
-// ===== INVESTOR FILE UPLOAD VALIDATION SCRIPT END =====
+document.getElementById("clearFiltersBtn")?.addEventListener("click", clearFilters);
+
 
 
 // ===== PROFILE CONTENT INJECTION =====
@@ -298,53 +433,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // ===== MESSAGE STARTS =====
 // ===== CHAT LIST POPULATION =====
-document.addEventListener("DOMContentLoaded", () => {
-  const chatList = document.getElementById("chatList");
-
-  if (chatList) {
-    const dummyChats = [
-      {
-        name: "Investor_A",
-        message: "We're interested in your pitch.",
-        time: "2 mins ago",
-        avatar: "assets/avatar1.png",
-        id: "investorA"
-      },
-      {
-        name: "Startup_B",
-        message: "Great! Let’s connect soon.",
-        time: "1 hour ago",
-        avatar: "assets/avatar2.png",
-        id: "startupB"
-      },
-      {
-        name: "Investor_C",
-        message: "Can you share more details?",
-        time: "Yesterday",
-        avatar: "assets/avatar3.png",
-        id: "investorC"
-      }
-    ];
-
-    dummyChats.forEach(chat => {
-      const entry = document.createElement("a");
-      entry.className = "chat-entry";
-      entry.href = `chat.html?user=${chat.id}`;
-      entry.innerHTML = `
-        <img src="${chat.avatar}" alt="${chat.name}">
-        <div class="chat-info">
-          <div class="chat-name">${chat.name}</div>
-          <div class="last-message">${chat.message}</div>
-        </div>
-        <div class="chat-time">${chat.time}</div>
-      `;
-      chatList.appendChild(entry);
-    });
-  }
-});
-// ===== END CHAT LIST POPULATION =====
-
-// ===== CHAT PAGE SCRIPT =====
+// ===== OPEN CHAT FUNCTION =====
+function openChat(name, image) {
+  localStorage.setItem("chatUser", JSON.stringify({ name, image }));
+  window.location.href = "chat.html";
+}
 document.addEventListener("DOMContentLoaded", () => {
   const chatBox = document.getElementById("chatBox");
   const sendBtn = document.getElementById("sendBtn");
@@ -352,35 +445,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const chatUserName = document.getElementById("chatUserName");
   const chatAvatar = document.getElementById("chatAvatar");
 
-  // Get user from URL
-  const params = new URLSearchParams(window.location.search);
-  const userId = params.get("user");
+  const chatUser = JSON.parse(localStorage.getItem("chatUser"));
 
-  // Dummy users list
-  const users = {
-    investorA: {
-      name: "Investor_A",
-      avatar: "assets/avatar1.png"
-    },
-    startupB: {
-      name: "Startup_B",
-      avatar: "assets/avatar2.png"
-    },
-    investorC: {
-      name: "Investor_C",
-      avatar: "assets/avatar3.png"
-    }
-  };
-
-  if (users[userId]) {
-    chatUserName.textContent = users[userId].name;
-    chatAvatar.src = users[userId].avatar;
-  } else {
+  if (chatUser && chatUserName && chatAvatar) {
+    chatUserName.textContent = chatUser.name;
+    chatAvatar.src = chatUser.image;
+  } else if (chatUserName && chatAvatar) {
     chatUserName.textContent = "Unknown User";
-    chatAvatar.src = "assets/default-avatar.png";
+    chatAvatar.src = "asset/default-avatar.png";
   }
 
-  // Load dummy messages
   const dummyMessages = [
     { from: "them", text: "Hi, how are you?" },
     { from: "me", text: "All good, you?" },
@@ -394,22 +468,30 @@ document.addEventListener("DOMContentLoaded", () => {
     chatBox.appendChild(div);
   });
 
-  // Send button logic
-  sendBtn.addEventListener("click", () => {
-    const message = chatInput.value.trim();
-    if (!message) return;
+  chatBox.scrollTop = chatBox.scrollHeight;
 
-    const div = document.createElement("div");
-    div.className = "chat-message self";
-    div.textContent = message;
-    chatBox.appendChild(div);
+  if (sendBtn && chatInput) {
+    sendBtn.addEventListener("click", () => {
+      const message = chatInput.value.trim();
+      if (!message) return;
 
-    chatInput.value = "";
-    chatBox.scrollTop = chatBox.scrollHeight;
-  });
+      const div = document.createElement("div");
+      div.className = "chat-message self";
+      div.textContent = message;
+      chatBox.appendChild(div);
+
+      chatInput.value = "";
+      chatBox.scrollTop = chatBox.scrollHeight;
+    });
+  }
 });
+
+
 // ===== END CHAT PAGE SCRIPT =====
+
+
 // ===== MESSAGE END =====
+
 
 // ===== Show/Hide Role-Based Sidebar Links =====
 document.addEventListener('DOMContentLoaded', () => {
@@ -719,4 +801,22 @@ document.getElementById("savePrivacy").addEventListener("click", function (e) {
 console.log("Successful Startup Page Loaded");
 /* ==== Successful Startup Script ends==== */
 
+
+/* ==== aproach investment Script starts==== */
+document.getElementById("approachForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      document.getElementById("successMsg").style.display = "block";
+      setTimeout(() => {
+        document.getElementById("successMsg").style.display = "none";
+        this.reset();
+      }, 3000);
+    });
+    window.addEventListener("DOMContentLoaded", () => {
+  const startupName = localStorage.getItem("selectedStartup");
+  const projectField = document.querySelector('input[name="startup"]');
+  if (projectField && startupName) {
+    projectField.value = startupName;
+  }
+});
+/* ==== aproach investment Script ends==== */
 

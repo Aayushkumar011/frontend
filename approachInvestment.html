@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Approach for Investment - PitchBridge</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="nav-container">
+      <h1 class="logo">PitchBridge</h1>
+      <nav></nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <h2>Approach for Investment</h2>
+
+    <form id="approachForm">
+      <label>Your Name *</label>
+      <input type="text" name="name" required>
+
+      <label>Email Address *</label>
+      <input type="email" name="email" required>
+
+      <label>LinkedIn / Website</label>
+      <input type="url" name="website" placeholder="https://...">
+
+      <div class="section-title">Investment Details</div>
+
+      <label>Startup You’re Interested In *</label>
+      <input type="text" name="startup" placeholder="Startup name" required>
+
+      <label>Investment Amount Range *</label>
+      <select name="amountRange" required>
+        <option value="" disabled selected>Select range</option>
+        <option value="below10L">Below ₹10 Lakhs</option>
+        <option value="10-50L">₹10 – ₹50 Lakhs</option>
+        <option value="50L-1Cr">₹50 Lakhs – ₹1 Crore</option>
+        <option value="above1Cr">Above ₹1 Crore</option>
+      </select>
+
+      <label>Preferred Equity/Terms (Optional)</label>
+      <input type="text" name="terms" placeholder="e.g., 10% equity for ₹25L">
+
+      <label>How Do You Want to Support?</label>
+      <textarea name="valueAdd" rows="3" placeholder="Mentoring, networking, strategic advice, etc."></textarea>
+
+      <label>Why This Startup? *</label>
+      <textarea name="reason" rows="4" required></textarea>
+
+      <label>Additional Message (Optional)</label>
+      <textarea name="message" rows="3" placeholder="Say something to the founder..."></textarea>
+
+      <button type="submit" class="button">🤝 Send Investment Interest</button>
+      <div class="success-message" id="successMsg">✅ Investment interest sent! We'll notify the founder.</div>
+      <a href="investorDeck.html" class="back-button">← Back to Investor Deck</a>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

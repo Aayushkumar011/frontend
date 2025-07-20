@@ -4,42 +4,239 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PitchBridge - Investor Deck</title>
-  <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
 </head>
 <body>
-  <div class="dashboard-container">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="logo">PitchBridge</div>
-      <nav class="sidebar-nav">
-        <a href="homepage.html">🏠 Home</a>
-        <a href="pitchDeck.html" id="pitchDeckLink">📊 Pitch Deck</a>
-        <a href="investorDeck.html" id="investorDeckLink" class="active">💼 Investor Deck</a>
-        <a href="profile.html">👤 Profile</a> 
-        <a href="message.html">💬 Messages</a>
-        <a href="setting.html">⚙️ Settings</a>
-        <a href="FAQandHelpPage.html">❓ FAQ / Help</a>
-        <a href="dashboardContact.html">📞 Contact</a>
-        <a href="logout.html">🚪 Log Out</a>
-      </nav>
-    </aside>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">PitchBridge</div>
+    <nav class="sidebar-nav">
+      <a href="homepage.html">🏠 Home</a>
+      <a href="pitchDeck.html" class="active">📊 Pitch Deck</a>
+      <a href="investorDeck.html">💼 Investor Deck</a>
+      <a href="profile.html">👤 Profile</a> 
+      <a href="message.html">💬 Messages</a>
+      <a href="setting.html">⚙️ Settings</a>
+      <a href="FAQandHelpPage.html">❓ FAQ / Help</a>
+      <a href="dashboardContact.html">📞 Contact</a>
+      <a href="logout.html">🚪 Log Out</a>
+    </nav>
+  </aside>
 
-    <!-- Main Content -->
-    <div class="main-section">
-      <h2>Investor Interests</h2>
-      <p class="subheading">View and manage the list of investors interested in your startup.</p>
+  <!-- Main Section -->
+  <div class="main-section">
+    <h2>Pitch Deck</h2>
+    <p class="subheading">Explore potential investors and track engagement</p>
 
-      <div class="upload-section">
-        <label for="investorFile" class="custom-file-upload">
-          <span id="investorFileName">Upload Investor Brief (PDF, max 5MB)</span>
-          <input type="file" id="investorFile" accept=".pdf" />
-        </label>
-        <button class="btn" onclick="uploadInvestorBrief()">Upload Brief</button>
+    <!-- ======== STATS SECTION START ======== -->
+<section class="stats-section">
+  <div class="stat-card">
+    <div class="icon"><i data-lucide="users"></i></div>
+    <h3>Total Investors</h3>
+    <p>2,045</p>
+  </div>
+  <div class="stat-card">
+    <div class="icon"><i data-lucide="briefcase"></i></div>
+    <h3>Startups Onboarded</h3>
+    <p>3,121</p>
+  </div>
+  <div class="stat-card">
+    <div class="icon"><i data-lucide="send"></i></div>
+    <h3>Pitches Submitted</h3>
+    <p>8,754</p>
+  </div>
+  <div class="stat-card">
+    <div class="icon"><i data-lucide="handshake"></i></div>
+    <h3>Successful Matches</h3>
+    <p>981</p>
+  </div>
+  <div class="stat-card">
+    <div class="icon"><i data-lucide="message-circle"></i></div>
+    <h3>Messages Exchanged</h3>
+    <p>43,205</p>
+  </div>
+  <div class="stat-card">
+    <div class="icon"><i data-lucide="dollar-sign"></i></div>
+    <h3>Startups Funded</h3>
+    <p>312</p>
+  </div>
+</section>
+
+<!-- ======== STATS SECTION END ======== -->
+
+
+    <!-- Top Bar with Search + Filter -->
+    <div class="top-bar">
+      <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search investors..." />
+        <button onclick="searchInvestors()">Search</button>
+        <button class="filter-btn show-all-btn" onclick="showAllInvestors()">Show All</button>
+      </div>
+
+      <div class="filter-wrapper">
+        <button class="filter-btn" onclick="toggleFilter()">Filter</button>
+        <div class="filter-panel" id="filterPanel">
+          <!-- Existing Filters -->
+          <label>Sector:
+            <select id="filterSector" onchange="filterInvestors()">
+              <option value="">All</option>
+              <option value="HealthTech">HealthTech</option>
+              <option value="AI">AI</option>
+              <option value="Green Energy">Green Energy</option>
+              <option value="EdTech">EdTech</option>
+              <option value="FinTech">FinTech</option>
+              <option value="SaaS">SaaS</option>
+              <option value="Social Impact">Social Impact</option>
+              <option value="AgriTech">AgriTech</option>
+              <option value="BioTech">BioTech</option>
+            </select>
+          </label>
+
+          <label>Region:
+            <select id="filterRegion" onchange="filterInvestors()">
+              <option value="">All</option>
+              <option value="India">India</option>
+              <option value="USA">USA</option>
+              <option value="Europe">Europe</option>
+              <option value="Singapore">Singapore</option>
+              <option value="UK">UK</option>
+              <option value="Africa">Africa</option>
+              <option value="South America">South America</option>
+              <option value="Japan">Japan</option>
+            </select>
+          </label>
+
+          <label>Stage:
+            <select id="filterStage" onchange="filterInvestors()">
+              <option value="">All</option>
+              <option value="Pre-Seed">Pre-Seed</option>
+              <option value="Seed">Seed</option>
+              <option value="Series A">Series A</option>
+              <option value="Series B">Series B</option>
+              <option value="Growth">Growth</option>
+            </select>
+          </label>
+
+          <label>Ticket Size:
+            <select id="filterTicket" onchange="filterInvestors()">
+              <option value="">All</option>
+              <option value="<$50K">&lt;$50K</option>
+              <option value="$50K–$200K">$50K–$200K</option>
+              <option value="$200K–$1M">$200K–$1M</option>
+              <option value="$1M+">$1M+</option>
+            </select>
+          </label>
+
+          <!-- 🔥 NEW Filters -->
+          <div class="filter-group">
+            <label for="dealFlow">Deal Flow:
+              <select id="dealFlow" onchange="filterInvestors()">
+                <option value="">All</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="filter-group">
+            <label for="firmType">Firm Type:
+              <select id="firmType" onchange="filterInvestors()">
+                <option value="">All</option>
+                <option value="angel">Angel</option>
+                <option value="vc">VC</option>
+                <option value="syndicate">Syndicate</option>
+                <option value="fund">Fund</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="filter-group">
+            <label for="country">Country:
+              <select id="country" onchange="filterInvestors()">
+                <option value="">All</option>
+                <option value="india">India</option>
+                <option value="usa">USA</option>
+                <option value="uk">UK</option>
+                <option value="germany">Germany</option>
+              </select>
+            </label>
+          </div>
+
+          <button class="clear-btn" onclick="clearFilters()">Clear Filters</button>
+        </div>
       </div>
     </div>
+
+    <!-- Investor Cards -->
+<div class="investor-cards" id="investorCards">
+  <div class="card" data-deal-flow="high" data-firm-type="vc" data-country="india">
+    <h3>Aarav Ventures</h3>
+    <!-- 🔥 Badge Row -->
+    <div class="badges">
+      <span class="badge badge-green">Active Deal</span>
+      <span class="badge badge-yellow">Top Investor</span>
+    </div>
+    <p>Sector: HealthTech</p>
+    <p>Region: India</p>
+    <p>Stage: Seed</p>
+    <p>Ticket Size: $50K–$200K</p>
+    <button class="profile-btn">View Profile</button>
+    <button class="message-btn">Message</button>
+    <button class="pitch-btn">Pitch Idea</button>
   </div>
 
-  <script src="script.js"></script>
+  <div class="card" data-deal-flow="medium" data-firm-type="angel" data-country="usa">
+    <h3>Zenith Capital</h3>
+    <!-- 🔥 Badge Row -->
+    <div class="badges">
+      <span class="badge badge-blue">Recently Funded</span>
+    </div>
+    <p>Sector: AI</p>
+    <p>Region: USA</p>
+    <p>Stage: Series A</p>
+    <p>Ticket Size: $1M+</p>
+    <button class="profile-btn">View Profile</button>
+    <button class="message-btn">Message</button>
+    <button class="pitch-btn">Pitch Idea</button>
+  </div>
+
+  <div class="card" data-deal-flow="low" data-firm-type="fund" data-country="germany">
+    <h3>FutureSeed</h3>
+    <!-- 🔥 Badge Row -->
+    <div class="badges">
+      <span class="badge badge-green">Active Deal</span>
+    </div>
+    <p>Sector: Green Energy</p>
+    <p>Region: Europe</p>
+    <p>Stage: Pre-Seed</p>
+    <p>Ticket Size: &lt;$50K</p>
+    <button class="profile-btn">View Profile</button>
+    <button class="message-btn">Message</button>
+    <button class="pitch-btn">Pitch Idea</button>
+  </div>
+
+  <div class="card" data-deal-flow="high" data-firm-type="syndicate" data-country="singapore">
+    <h3>BridgeStone VC</h3>
+    <!-- 🔥 Badge Row -->
+    <div class="badges">
+      <span class="badge badge-yellow">Top Investor</span>
+      <span class="badge badge-blue">Recently Funded</span>
+    </div>
+    <p>Sector: EdTech</p>
+    <p>Region: Singapore</p>
+    <p>Stage: Seed</p>
+    <p>Ticket Size: $200K–$1M</p>
+    <button class="profile-btn">View Profile</button>
+    <button class="message-btn">Message</button>
+    <button class="pitch-btn">Pitch Idea</button>
+  </div>
+</div>
+   
+  </div>
+  <script src="script.js" defer></script>
 </body>
-</html>
+</html> all set just i an in startup i should not see investor deck and investor should not see pitch deck

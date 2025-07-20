@@ -4,43 +4,171 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PitchBridge - Investor Deck</title>
-  <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-  <div class="dashboard-container">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="logo">PitchBridge</div>
-      <nav class="sidebar-nav">
-        <a href="homepage.html">🏠 Home</a>
-        <a href="pitchDeck.html" id="pitchDeckLink">📊 Pitch Deck</a>
-        <a href="investorDeck.html" id="investorDeckLink" class="active">💼 Investor Deck</a>
-        <a href="profile.html">👤 Profile</a> 
-        <a href="message.html">💬 Messages</a>
-        <a href="setting.html">⚙️ Settings</a>
-        <a href="FAQandHelpPage.html">❓ FAQ / Help</a>
-        <a href="dashboardContact.html">📞 Contact</a>
-        <a href="logout.html">🚪 Log Out</a>
-      </nav>
-    </aside>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">PitchBridge</div>
+    <nav class="sidebar-nav">
+      <a href="homepage.html">🏠 Home</a>
+      <a href="pitchDeck.html" id="pitchDeckLink">📊 Pitch Deck</a>
+      <a href="investorDeck.html" class="active" id="investorDeckLink">💼 Investor Deck</a>
+      <a href="profile.html">👤 Profile</a> 
+      <a href="message.html">💬 Messages</a>
+      <a href="setting.html">⚙️ Settings</a>
+      <a href="FAQandHelpPage.html">❓ FAQ / Help</a>
+      <a href="dashboardContact.html">📞 Contact</a>
+      <a href="logout.html">🚪 Log Out</a>
+    </nav>
+  </aside>
 
-    <!-- Main Content -->
-    <div class="main-section">
-      <h2>Investor Interests</h2>
-      <p class="subheading">View and manage the list of investors interested in your startup.</p>
+  <!-- Main Section -->
+  <div class="main-section">
+    <h2>Investor Deck</h2>
+    <p class="subheading">Discover and connect with high-potential startups</p>
 
-      <div class="upload-section">
-        <label for="investorFile" class="custom-file-upload">
-          <span id="investorFileName">Upload Investor Brief (PDF, max 5MB)</span>
-          <input type="file" id="investorFile" accept=".pdf" />
-        </label>
-        <button class="btn" onclick="uploadInvestorBrief()">Upload Brief</button>
+    <!-- Stats Section -->
+<section class="stats-section">
+  <div class="stat-card">
+    <div class="icon"><i data-lucide="rocket"></i></div>
+    <h3>Total Startups</h3>
+    <p id="totalStartups">15000</p>
+  </div>
+  <div class="stat-card">
+    <div class="icon"><i data-lucide="send"></i></div>
+    <h3>Pitches Reviewed</h3>
+    <p id="pitchesReviewed">860</p>
+  </div>
+  <div class="stat-card">
+    <div class="icon"><i data-lucide="handshake"></i></div>
+    <h3>Investments Made</h3>
+    <p id="investmentsMade">$1200k</p>
+  </div>
+  <div class="stat-card">
+    <div class="icon"><i data-lucide="message-circle"></i></div>
+    <h3>Messages Sent</h3>
+    <p id="messagesSent">1000+</p>
+  </div>
+  <div class="stat-card">
+    <div class="icon"><i data-lucide="users"></i></div>
+    <h3>Active Investors</h3>
+    <p id="activeInvestors">1200</p>
+  </div>
+  <div class="stat-card">
+    <div class="icon"><i data-lucide="star"></i></div>
+    <h3>Top Rated Pitches</h3>
+    <p id="topRatedPitches">200</p>
+  </div>
+</section>
+
+
+    <!-- Search + Filter -->
+    <div class="top-bar">
+      <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search startups..." />
+        <button onclick="searchStartups()">Search</button>
+        <button class="filter-btn show-all-btn" onclick="showAllStartups()">Show All</button>
+      </div>
+
+      <div class="filter-wrapper">
+        <button class="filter-btn" onclick="toggleFilter()">Filter</button>
+        <div class="filter-panel" id="filterPanel">
+          <label>Sector:
+            <select id="filterSector" onchange="filterStartups()">
+              <option value="">All</option>
+              <option value="fintech">FinTech</option>
+              <option value="edtech">EdTech</option>
+              <option value="healthtech">HealthTech</option>
+              <option value="greentech">GreenTech</option>
+              <option value="agritech">AgriTech</option>
+            </select>
+          </label>
+          <label>Stage:
+            <select id="filterStage" onchange="filterStartups()">
+              <option value="">All</option>
+              <option value="idea">Idea</option>
+              <option value="mvp">MVP</option>
+              <option value="revenue">Revenue</option>
+              <option value="scaling">Scaling</option>
+            </select>
+          </label>
+          <label>Location:
+            <select id="filterLocation" onchange="filterStartups()">
+              <option value="">All</option>
+              <option value="india">India</option>
+              <option value="usa">USA</option>
+              <option value="uk">UK</option>
+              <option value="europe">Europe</option>
+            </select>
+          </label>
+          <button class="clear-btn" onclick="clearFilters()">Clear Filters</button>
+        </div>
       </div>
     </div>
+
+    <!-- Startup Cards -->
+<div class="investor-cards" id="startupCards">
+  <div class="card" data-sector="FinTech" data-stage="MVP" data-location="India">
+    <h3>RupeeRise</h3>
+    <div class="badges">
+      <span class="badge badge-green">High Growth</span>
+    </div>
+    <p>Sector: FinTech</p>
+    <p>Location: India</p>
+    <p>Stage: MVP</p>
+    <p>Funding Goal: $100K</p>
+    <button class="profile-btn">View Profile</button>
+    <button class="message-btn">Message</button>
+    <button class="invest-btn" onclick="approachStartup('RupeeRise')">Approach for Investment</button>
   </div>
 
+  <div class="card" data-sector="HealthTech" data-stage="Revenue" data-location="USA">
+    <h3>WellNest</h3>
+    <div class="badges">
+      <span class="badge badge-blue">Trending</span>
+    </div>
+    <p>Sector: HealthTech</p>
+    <p>Location: USA</p>
+    <p>Stage: Revenue</p>
+    <p>Funding Goal: $500K</p>
+    <button class="profile-btn">View Profile</button>
+    <button class="message-btn">Message</button>
+    <button class="invest-btn" onclick="approachStartup('WellNest')">Approach for Investment</button>
+  </div>
 
-  <script src="script.js"></script>
+  <div class="card" data-sector="AgriTech" data-stage="Idea" data-location="Europe">
+    <h3>AgriNova</h3>
+    <div class="badges">
+      <span class="badge badge-yellow">Early Disruptor</span>
+    </div>
+    <p>Sector: AgriTech</p>
+    <p>Location: Europe</p>
+    <p>Stage: Idea</p>
+    <p>Funding Goal: $30K</p>
+    <button class="profile-btn">View Profile</button>
+    <button class="message-btn">Message</button>
+    <button class="invest-btn" onclick="approachStartup('AgriNova')">Approach for Investment</button>
+  </div>
+
+  <div class="card" data-sector="EdTech" data-stage="Scaling" data-location="UK">
+    <h3>LearnLoop</h3>
+    <div class="badges">
+      <span class="badge badge-green">Top Rated</span>
+      <span class="badge badge-blue">Series A Ready</span>
+    </div>
+    <p>Sector: EdTech</p>
+    <p>Location: UK</p>
+    <p>Stage: Scaling</p>
+    <p>Funding Goal: $1M</p>
+    <button class="profile-btn">View Profile</button>
+    <button class="message-btn">Message</button>
+    <button class="invest-btn" onclick="approachStartup('LearnLoop')">Approach for Investment</button>
+  </div>
+</div>
+  <script src="script.js" defer></script>
+
 </body>
 </html>

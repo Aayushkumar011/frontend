@@ -29,6 +29,18 @@
     <main class="main-section">
       <h2>Messages</h2>
       <div class="chat-list" id="chatList">
+        <div class="chat-entry" onclick="openChat('John Doe', 'asset/profile1.jpg')">
+  <img src="asset/profile1.jpg" alt="Profile" />
+  <span>John Doe</span>
+</div>
+<div class="chat-entry" onclick="openChat('Jane Smith', 'asset/profile2.jpg')">
+  <img src="asset/profile2.jpg" alt="Profile" />
+  <span>Jane Smith</span>
+</div>
+<div class="chat-entry" onclick="openChat('Alex Johnson', 'asset/profile3.jpg')">
+  <img src="asset/profile3.jpg" alt="Profile" />
+  <span>Alex Johnson</span>
+</div>
         <!-- List of chats will be injected here -->
       </div>
       <footer>&copy; 2025 PitchBridge. All rights reserved.</footer>
@@ -36,6 +48,7 @@
   </div>
 
   <script src="script.js"></script>
+
 </body>
 </html>
 

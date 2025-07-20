@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Upload Your Pitch - PitchBridge</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  
+</head>
+<body>
+     <header class="header">
+    <div class="nav-container">
+      <h1 class="logo">PitchBridge</h1>
+      <nav>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <h2>Upload Your Pitch</h2>
+
+
+    <form id="pitchForm">
+      <label>Project Title *</label>
+      <input type="text" name="title" required>
+
+      <label>Tagline</label>
+      <input type="text" name="tagline" placeholder="One-liner about your startup">
+
+      <label>Project Description</label>
+      <textarea name="description" rows="4" placeholder="Explain your project..."></textarea>
+
+      <div class="section-title">Business Details</div>
+
+      <label>Problem You're Solving</label>
+      <textarea name="problem" rows="3"></textarea>
+
+      <label>Your Unique Solution</label>
+      <textarea name="solution" rows="3"></textarea>
+
+      <label>Target Market</label>
+      <input type="text" name="market">
+
+      <label>Current Stage</label>
+      <select name="stage">
+        <option value="" disabled selected>Choose stage</option>
+        <option value="idea">Idea</option>
+        <option value="prototype">Prototype</option>
+        <option value="launched">Launched</option>
+        <option value="revenue">Revenue Generating</option>
+      </select>
+
+      <div class="section-title">Media Uploads</div>
+
+      <label>Upload Pitch Deck (PDF)</label>
+      <input type="file" name="pitchPdf" accept=".pdf,.doc,.docx">
+
+      <label>Upload Logo / Image</label>
+      <input type="file" name="logo" accept="image/*">
+
+      <label>Optional Pitch Video (YouTube Link)</label>
+      <input type="url" name="video" placeholder="https://youtube.com/...">
+
+      <div class="section-title">Contact Information</div>
+
+      <label>Your Email *</label>
+      <input type="email" name="email" required>
+
+      <label>LinkedIn / Website</label>
+      <input type="url" name="website" placeholder="https://...">
+
+      <button type="submit" class="button">🚀 Submit Pitch</button>
+      <div class="success-message" id="successMsg">✅ Pitch submitted successfully! We’ll get in touch soon.</div>
+      <a href="pitchDeck.html" class="back-button">← Back to Pitch Deck</a>
+    </form>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
