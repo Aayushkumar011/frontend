@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Explore - PitchBridge</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <h1 class="logo">PitchBridge</h1>
+    </div>
+  </header>
+
+  <div class="explore-header-tools">
+  <h1 class="explore-heading">Explore Opportunities</h1>
+
+  <div class="explore-controls">
+    <div class="search-box">
+      <input type="text" class="explore-search" placeholder="Search startups or investors..." />
+      <button class="explore-search-btn">Search</button>
+    </div>
+
+    <div class="button-row">
+      <div class="button-right">
+        <button class="explore-showall-btn">Show All</button>
+
+        <div class="filter-wrapper">
+          <button class="explore-filter-btn" id="filterToggleBtn">
+            <img src="asset/filter.svg" alt="Filter" class="filter-icon" />
+            Filter
+          </button>
+          <div id="filterPopup" class="filter-popup hidden">
+            <!-- Dynamic filter content -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <main class="explore-container">
+    <div class="explore-toggle-buttons">
+      <button class="explore-toggle-btn active" id="startupToggle">Startup</button>
+      <button class="explore-toggle-btn" id="investorToggle">Investor</button>
+    </div>
+
+    <!-- Startup sees Investor Cards -->
+    <div id="investorList" class="card-list investor-card-list">
+      <div class="explore-card" data-location="Mumbai" data-industry="FinTech" data-stage="Seed">
+        <p><strong>Name:</strong> Jane Kapoor</p>
+        <p><strong>Focus:</strong> FinTech, AI</p>
+        <p><strong>Location:</strong> Mumbai</p>
+        <button onclick="location.href='signUpPage.html'">View Profile</button>
+      </div>
+      <div class="explore-card" data-location="Bengaluru" data-industry="HealthTech" data-stage="Series A">
+        <p><strong>Name:</strong> Raj Mehta</p>
+        <p><strong>Focus:</strong> HealthTech, SaaS</p>
+        <p><strong>Location:</strong> Bengaluru</p>
+        <button onclick="location.href='signUpPage.html'">View Profile</button>
+      </div>
+      <div class="explore-card" data-location="Delhi" data-industry="EdTech" data-stage="Series B">
+        <p><strong>Name:</strong> Eva Thomas</p>
+        <p><strong>Focus:</strong> EdTech, Green Energy</p>
+        <p><strong>Location:</strong> Delhi</p>
+        <button onclick="location.href='signUpPage.html'">View Profile</button>
+      </div>
+    </div>
+
+    <!-- Investor sees Startup Cards -->
+    <div id="startupList" class="card-list startup-card-list explore-card-list" style="display: none;">
+      <div class="explore-card" data-location="Mumbai" data-industry="AgriTech" data-stage="$500K">
+        <p><strong>Startup Name:</strong> FarmLink</p>
+        <p><strong>Industry:</strong> AgriTech</p>
+        <p><strong>Funding Goal:</strong> $500K</p>
+        <button onclick="location.href='signUpPage.html'">View Profile</button>
+      </div>
+      <div class="explore-card" data-location="Delhi" data-industry="EdTech" data-stage="$1M">
+        <p><strong>Startup Name:</strong> SkillNest</p>
+        <p><strong>Industry:</strong> EdTech</p>
+        <p><strong>Funding Goal:</strong> $1M</p>
+        <button onclick="location.href='signUpPage.html'">View Profile</button>
+      </div>
+      <div class="explore-card" data-location="Bengaluru" data-industry="Logistics" data-stage="$2M">
+        <p><strong>Startup Name:</strong> UrbanCrate</p>
+        <p><strong>Industry:</strong> Logistics</p>
+        <p><strong>Funding Goal:</strong> $2M</p>
+        <button onclick="location.href='signUpPage.html'">View Profile</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="public-footer">
+    <p>© 2025 PitchBridge. All rights reserved. 
+      <a href="TermsAndConditions.html">Terms</a> | 
+      <a href="privacyPolicy.html">Privacy</a> |
+      <a href="disclaimer.html">Disclaimer</a>
+    </p>
+  </footer>
+
+  <script>
+  const startupTab = document.getElementById('startupToggle');
+  const investorTab = document.getElementById('investorToggle');
+  const investorList = document.getElementById('investorList');
+  const startupList = document.getElementById('startupList');
+
+  const searchInput = document.querySelector('.explore-search');
+  const searchBtn = document.querySelector('.explore-search-btn');
+  const showAllBtn = document.querySelector('.explore-showall-btn');
+  const filterBtn = document.querySelector('.explore-filter-btn');
+  const filterPopup = document.getElementById('filterPopup');
+
+  startupTab.addEventListener('click', () => {
+    startupTab.classList.add('active');
+    investorTab.classList.remove('active');
+    startupList.style.display = 'block';
+    investorList.style.display = 'none';
+    filterPopup.classList.add('hidden');
+  });
+
+  investorTab.addEventListener('click', () => {
+    investorTab.classList.add('active');
+    startupTab.classList.remove('active');
+    startupList.style.display = 'none';
+    investorList.style.display = 'block';
+    filterPopup.classList.add('hidden');
+  });
+
+  function filterCards() {
+    const query = searchInput.value.toLowerCase();
+    const visibleList = investorList.style.display !== 'none' ? investorList : startupList;
+    const cards = visibleList.querySelectorAll('.explore-card');
+
+    cards.forEach(card => {
+      const text = card.innerText.toLowerCase();
+      const matchesQuery = text.includes(query);
+      card.style.display = matchesQuery ? 'block' : 'none';
+    });
+  }
+
+  searchBtn.addEventListener('click', filterCards);
+  searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') filterCards();
+  });
+
+  showAllBtn.addEventListener('click', () => {
+    searchInput.value = '';
+    const visibleList = investorList.style.display !== 'none' ? investorList : startupList;
+    const cards = visibleList.querySelectorAll('.explore-card');
+    cards.forEach(card => card.style.display = 'block');
+  });
+
+  filterBtn.addEventListener('click', () => {
+    filterPopup.classList.toggle('hidden');
+    filterPopup.innerHTML = '';
+
+    const isInvestorView = investorList.style.display !== 'none';
+
+    // Common filters (location, industry, stage)
+    let commonFilters = `
+      <label>Location</label>
+      <select id="filter-location">
+        <option value="">All Locations</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="Bengaluru">Bengaluru</option>
+        <option value="Delhi">Delhi</option>
+      </select>
+
+      <label>Stage</label>
+      <select id="filter-stage">
+        <option value="">All Stages</option>
+        <option value="Seed">Seed</option>
+        <option value="Series A">Series A</option>
+        <option value="Series B">Series B</option>
+        <option value="$500K">$500K</option>
+        <option value="$1M">$1M</option>
+        <option value="$2M">$2M</option>
+      </select>
+    `;
+
+    if (isInvestorView) {
+      filterPopup.innerHTML = `
+        ${commonFilters}
+        <label>Industry</label>
+        <select id="filter-industry">
+          <option value="">All Industries</option>
+          <option value="FinTech">FinTech</option>
+          <option value="HealthTech">HealthTech</option>
+          <option value="EdTech">EdTech</option>
+          <option value="AgriTech">AgriTech</option>
+          <option value="Green Energy">Green Energy</option>
+          <option value="Logistics">Logistics</option>
+          <option value="SaaS">SaaS</option>
+        </select>
+
+        <label>
+          <input type="checkbox" id="investorActive" />
+          Only Active Investors
+        </label>
+
+        <button onclick="applyInvestorFilters()">Apply Filters</button>
+      `;
+    } else {
+      filterPopup.innerHTML = `
+        ${commonFilters}
+        <label>Industry</label>
+        <select id="filter-industry">
+          <option value="">All Industries</option>
+          <option value="FinTech">FinTech</option>
+          <option value="HealthTech">HealthTech</option>
+          <option value="EdTech">EdTech</option>
+          <option value="AgriTech">AgriTech</option>
+          <option value="Green Energy">Green Energy</option>
+          <option value="Logistics">Logistics</option>
+          <option value="SaaS">SaaS</option>
+        </select>
+
+        <label>
+          <input type="checkbox" id="startupFunded" />
+          Only Funded Startups
+        </label>
+
+        <button onclick="applyStartupFilters()">Apply Filters</button>
+      `;
+    }
+  });
+
+  function applyInvestorFilters() {
+    const location = document.getElementById('filter-location').value;
+    const industry = document.getElementById('filter-industry').value;
+    const stage = document.getElementById('filter-stage').value;
+    const onlyActive = document.getElementById('investorActive').checked;
+
+    const cards = investorList.querySelectorAll('.explore-card');
+    cards.forEach(card => {
+      const matchesLocation = !location || card.dataset.location === location;
+      const matchesIndustry = !industry || card.dataset.industry === industry;
+      const matchesStage = !stage || card.dataset.stage === stage;
+      const matchesActive = !onlyActive || card.dataset.active === "true";
+
+      card.style.display = (matchesLocation && matchesIndustry && matchesStage && matchesActive) ? 'block' : 'none';
+    });
+
+    filterPopup.classList.add('hidden');
+  }
+
+  function applyStartupFilters() {
+    const location = document.getElementById('filter-location').value;
+    const industry = document.getElementById('filter-industry').value;
+    const stage = document.getElementById('filter-stage').value;
+    const onlyFunded = document.getElementById('startupFunded').checked;
+
+    const cards = startupList.querySelectorAll('.explore-card');
+    cards.forEach(card => {
+      const matchesLocation = !location || card.dataset.location === location;
+      const matchesIndustry = !industry || card.dataset.industry === industry;
+      const matchesStage = !stage || card.dataset.stage === stage;
+      const matchesFunded = !onlyFunded || card.dataset.funded === "true";
+
+      card.style.display = (matchesLocation && matchesIndustry && matchesStage && matchesFunded) ? 'block' : 'none';
+    });
+
+    filterPopup.classList.add('hidden');
+  }
+</script>
+
+
+</body>
+</html>

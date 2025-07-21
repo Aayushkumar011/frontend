@@ -3,19 +3,72 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact - PitchBridge</title>
+  <title>Contact Us - PitchBridge</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* Light touch-up if not already in style.css */
+    .contact-form {
+  width: 100%;
+  max-width: 800px;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin: 0; /* remove auto margin that centers */
+}
+    .contact-form label {
+      font-weight: 600;
+    }
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    .contact-form button {
+      padding: 0.75rem;
+      background-color: #5c67f2;
+      color: white;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    .contact-form button:hover {
+      background-color: #434bd4;
+    }
+    .status-message {
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
+      color: green;
+    }
+    .public-header, .public-footer {
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+    .contact-title {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 2rem;
+    }
+   
+  </style>
 </head>
 <body class="public-page">
 
-  <header class="public-header">
-    <h1>PitchBridge</h1>
+  <header class="header">
+    <div class="nav-container">
+      <h1 class="logo">PitchBridge</h1>>
+    </div>
   </header>
 
   <main class="main-content">
     <h2 class="contact-title">Get in Touch</h2>
-    <form id="contactForm" class="contact-form">
+    <form id="contactForm" class="contact-form" onsubmit="handleSubmit(event)">
       <label for="name">Your Name</label>
       <input type="text" id="name" name="name" required />
 
@@ -45,6 +98,21 @@
     <p>© 2025 PitchBridge. All rights reserved.</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    function handleSubmit(event) {
+      event.preventDefault();
+      const status = document.getElementById("form-status");
+      status.textContent = "Your message has been sent!";
+      status.style.color = "green";
+
+      // Clear form after submission
+      document.getElementById("contactForm").reset();
+
+      // Optional: reset status after 5 seconds
+      setTimeout(() => {
+        status.textContent = "";
+      }, 5000);
+    }
+  </script>
 </body>
 </html>
